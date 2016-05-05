@@ -36,7 +36,8 @@ values."
      javascript
      latex
      markdown
-     org
+     (org :variables
+          org-enable-github-support t)
      (python :variables
              python-enable-yapf-format-on-save t
              python-auto-set-local-pyenv-version 'on-project-switch)
@@ -297,7 +298,7 @@ layers configuration. You are free to put any user code."
   (setq frame-inherited-parameters '(left top width height))
   ;; For edit-with-chrome
   (setq edit-server-url-major-mode-alist
-        '(("github\\.com" . org-mode)
+        '(("github\\.com" . gfm-mode)
           ("atlassian\\.net" . jira-markup-mode)))
   (add-hook 'edit-server-done-hook (lambda () (shell-command "open -a \"Google Chrome\"")))
   ;; For haml-lint
@@ -351,7 +352,6 @@ layers configuration. You are free to put any user code."
  '(multi-term-switch-after-close nil)
  '(org-M-RET-may-split-line (quote ((default))))
  '(org-export-backends (quote (ascii html icalendar latex odt)))
- '(org-export-initial-scope (quote subtree))
  '(projectile-enable-caching t)
  '(reftex-plug-into-AUCTeX (quote (t nil t t t)) t)
  '(ruby-refactor-add-parens t)
