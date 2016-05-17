@@ -115,13 +115,11 @@ values."
                          ;; spacemacs-dark
                          dichromacy
                          ;; spacemacs-light
-                         ;; solarized-light
+                         solarized-light
                          solarized-dark
                          ;; leuven
                          hc-zenburn
                          ;; zenburn
-                         base16-ocean-dark
-                         base16-solarized-dark
                          )
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -294,7 +292,9 @@ layers configuration. You are free to put any user code."
   (evil-leader/set-key "oy" 'private/show-and-copy-buffer-filename-from-root)
   (evil-leader/set-key "oc" 'private/open-local-platform-in-browser)
   (global-set-key (kbd "C-'") 'toggle-quotes)
-  (add-hook 'enh-ruby-mode-hook 'ruby-refactor-mode-launch)
+  ;; Treat underscore as a symbol in Ruby so autocomplete includes whole identifiers
+  (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "_")))
+  (add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch)
   (setq frame-inherited-parameters '(left top width height))
   ;; For edit-with-chrome
   (setq edit-server-url-major-mode-alist
@@ -330,6 +330,14 @@ layers configuration. You are free to put any user code."
  ;; If there is more than one, they won't work right.
  '(ac-disable-faces nil)
  '(compilation-message-face (quote default))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#839496")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
+ '(custom-safe-themes
+   (quote
+    ("1e3b2c9e7e84bb886739604eae91a9afbdfb2e269936ec5dd4a9d3b7a943af7f" default)))
+ '(doc-view-scale-internally nil)
  '(eshell-buffer-shorthand nil t)
  '(eshell-history-size 10000 t)
  '(evil-ex-visual-char-range t)
@@ -345,16 +353,47 @@ layers configuration. You are free to put any user code."
  '(helm-grep-ignored-directories
    (quote
     ("SCCS" "RCS" "CVS" "MCVS" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".gvfs" "log" "vendor")))
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#002b36" 0.25)
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#93a1a1")
+ '(highlight-tail-colors
+   (quote
+    (("#073642" . 0)
+     ("#546E00" . 20)
+     ("#00736F" . 30)
+     ("#00629D" . 50)
+     ("#7B6000" . 60)
+     ("#8B2C02" . 70)
+     ("#93115C" . 85)
+     ("#073642" . 100))))
+ '(hl-bg-colors
+   (quote
+    ("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00")))
+ '(hl-fg-colors
+   (quote
+    ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(mac-command-modifier (quote super))
  '(mac-option-modifier (quote meta))
+ '(magit-diff-use-overlays nil)
  '(multi-term-dedicated-close-back-to-open-buffer-p t)
  '(multi-term-scroll-to-bottom-on-output t)
  '(multi-term-switch-after-close nil)
+ '(nrepl-message-colors
+   (quote
+    ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(org-M-RET-may-split-line (quote ((default))))
- '(org-export-backends (quote (ascii html icalendar latex odt)))
+ '(org-export-backends (quote (ascii html latex odt)))
+ '(org-export-headline-levels 1)
+ '(pos-tip-background-color "#073642")
+ '(pos-tip-foreground-color "#93a1a1")
  '(projectile-enable-caching t)
  '(reftex-plug-into-AUCTeX (quote (t nil t t t)) t)
  '(ruby-refactor-add-parens t)
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-bind-key-alist
    (quote
     (("<tab>" . term-send-tab)
@@ -378,11 +417,43 @@ layers configuration. You are free to put any user code."
      ("M-," . term-send-raw)
      ("M-." . comint-dynamic-complete)
      ("C-a" . term-send-raw))))
- '(visible-bell t))
+ '(term-default-bg-color "#002b36")
+ '(term-default-fg-color "#839496")
+ '(vc-annotate-background "#202020")
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#C99090")
+     (40 . "#D9A0A0")
+     (60 . "#ECBC9C")
+     (80 . "#DDCC9C")
+     (100 . "#EDDCAC")
+     (120 . "#FDECBC")
+     (140 . "#6C8C6C")
+     (160 . "#8CAC8C")
+     (180 . "#9CBF9C")
+     (200 . "#ACD2AC")
+     (220 . "#BCE5BC")
+     (240 . "#CCF8CC")
+     (260 . "#A0EDF0")
+     (280 . "#79ADB0")
+     (300 . "#89C5C8")
+     (320 . "#99DDE0")
+     (340 . "#9CC7FB")
+     (360 . "#E090C7"))))
+ '(vc-annotate-very-old-color "#E090C7")
+ '(visible-bell t)
+ '(weechat-color-list
+   (quote
+    (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83")))
+ '(xterm-color-names
+   ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#eee8d5"])
+ '(xterm-color-names-bright
+   ["#002b36" "#cb4b16" "#586e75" "#657b83" "#839496" "#6c71c4" "#93a1a1" "#fdf6e3"]))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Source Code Pro" :foundry "nil" :slant normal :weight normal :height 130 :width normal))))
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

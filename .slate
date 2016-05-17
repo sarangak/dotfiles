@@ -27,13 +27,13 @@ bind t:cmd;alt focus 'iTerm'
 # The triple keys
 alias triple ctrl;alt;cmd
 # alias quadruple alt;ctrl;shift;cmd
-# alias move ctrl;alt
+alias move ctrl;alt
 
 # Focus bindings
-# bind k:${move}  focus up
-# bind j:${move}  focus down
-# bind h:${move}  focus left
-# bind l:${move}  focus right
+bind k:${move}  focus up
+bind j:${move}  focus down
+bind h:${move}  focus left
+bind l:${move}  focus right
 
 # Location bindings
 bind h:${triple} ${lefthalf}
