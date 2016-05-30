@@ -28,6 +28,7 @@ values."
      chrome
      emacs-lisp
      ess
+     eyebrowse
      git
      ;; Github processing is too slow with the Console repo
      ;; github
@@ -157,10 +158,10 @@ values."
    ;; If non nil `Y' is remapped to `y$'. (default t)
    dotspacemacs-remap-Y-to-y$ t
    ;; Name of the default layout (default "Default")
-   dotspacemacs-default-layout-name "Default"
+   dotspacemacs-default-layout-name "All"
    ;; If non nil the default layout name is displayed in the mode-line.
    ;; (default nil)
-   dotspacemacs-display-default-layout nil
+   dotspacemacs-display-default-layout t
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
    dotspacemacs-auto-resume-layouts nil
@@ -292,6 +293,8 @@ layers configuration. You are free to put any user code."
   (evil-leader/set-key "oy" 'private/show-and-copy-buffer-filename-from-root)
   (evil-leader/set-key "oc" 'private/open-local-platform-in-browser)
   (global-set-key (kbd "C-'") 'toggle-quotes)
+  ;; Wrap lines in text modes (including Org mode)
+  (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
   ;; Treat underscore as a symbol in Ruby so autocomplete includes whole identifiers
   (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "_")))
   (add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch)
@@ -299,6 +302,10 @@ layers configuration. You are free to put any user code."
   ;; For edit-with-chrome
   (setq edit-server-url-major-mode-alist
         '(("github\\.com" . gfm-mode)
+          ;; gmail-message-mode package is supposed to add the following hook
+          ;; but it doesn't work. Possibly because of interaction issue with how
+          ;; Spacemacs loads this layer
+          ("mail\\.google\\." . gmail-message-edit-server-mode)
           ("atlassian\\.net" . jira-markup-mode)))
   (add-hook 'edit-server-done-hook (lambda () (shell-command "open -a \"Google Chrome\"")))
   ;; For haml-lint
