@@ -57,9 +57,9 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(ruby-refactor toggle-quotes ox-reveal jira-markup-mode ox-jira)
+   dotspacemacs-additional-packages '(ruby-refactor toggle-quotes ox-reveal jira-markup-mode ox-jira evil-smartparens)
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '(smartparens evil-search-highlight-persist)
+   dotspacemacs-excluded-packages '(evil-search-highlight-persist)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
@@ -229,7 +229,7 @@ values."
    dotspacemacs-line-numbers 'relative
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode nil
+   dotspacemacs-smartparens-strict-mode t
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
@@ -326,6 +326,8 @@ layers configuration. You are free to put any user code."
   ;; So hippie-expand will try elements from the kill ring
   (add-to-list 'hippie-expand-try-functions-list 'try-expand-whole-kill)
   (define-key evil-motion-state-map [C-i] 'evil-jump-forward)
+  ;; I couldn't get this to work with rspec
+  ;; (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -395,6 +397,7 @@ layers configuration. You are free to put any user code."
  '(org-M-RET-may-split-line (quote ((default))))
  '(org-export-backends (quote (ascii html latex odt)))
  '(org-export-headline-levels 1)
+ '(persp-init-new-frame-behaviour-override nil)
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(projectile-enable-caching t)
