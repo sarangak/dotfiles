@@ -42,6 +42,7 @@ values."
      (python :variables
              python-enable-yapf-format-on-save t
              python-auto-set-local-pyenv-version 'on-project-switch)
+     ranger
      ruby
      ruby-on-rails
      (shell :variables
@@ -57,7 +58,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(ruby-refactor toggle-quotes ox-reveal jira-markup-mode ox-jira evil-smartparens)
+   dotspacemacs-additional-packages '(ruby-refactor toggle-quotes jira-markup-mode ox-jira evil-smartparens ox-reveal)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(evil-search-highlight-persist)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -229,7 +230,7 @@ values."
    dotspacemacs-line-numbers 'relative
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode t
+   dotspacemacs-smartparens-strict-mode nil
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
@@ -276,6 +277,10 @@ user code."
               (message file-name)
               (kill-new file-name)))
         (error "Buffer not visiting a file or no project root"))))
+  (defun align-colons (beg end)
+    "Align the given region for key: value content"
+    (interactive)
+    (align-regexp beg end ":\\(\\s-*\\)" 1 1 nil))
 )
 
 (defun dotspacemacs/user-config ()
@@ -338,6 +343,8 @@ layers configuration. You are free to put any user code."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-disable-faces nil)
+ '(coffee-indent-like-python-mode t)
+ '(company-idle-delay 0)
  '(compilation-message-face (quote default))
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
@@ -351,10 +358,11 @@ layers configuration. You are free to put any user code."
  '(eshell-history-size 10000 t)
  '(evil-ex-visual-char-range t)
  '(exec-path-from-shell-arguments (quote ("-l")))
- '(fci-rule-color "#49483E" t)
+ '(fci-rule-color "#49483E")
  '(flycheck-coffeelintrc "coffeelint.json")
  '(flycheck-disabled-checkers (quote (haml)))
  '(font-latex-fontify-sectioning (quote color))
+ '(global-subword-mode t)
  '(grep-find-ignored-directories
    (quote
     ("SCCS" "RCS" "CVS" "MCVS" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "log" "vendor")))

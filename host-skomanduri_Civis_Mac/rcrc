@@ -1,0 +1,3 @@
+EXCLUDES="README.md"
+# Use Box Sync directory to store dotfiles -- this has weird behavior (creates ~/Box directory in dotfiles directory) but works
+DOTFILES_DIRS="~/Box\ Sync/dotfiles"
