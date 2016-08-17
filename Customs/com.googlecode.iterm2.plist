@@ -540,11 +540,13 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>317 515 924 485 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 585 585 451 0 0 1920 1057 </string>
+	<string>0 628 1920 429 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>640 326 570 451 0 0 1280 777 </string>
+	<string>960 4 960 1053 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>960 11 878 1046 0 0 1920 1057 </string>
+	<string>2 531 1918 526 0 0 1920 1057 </string>
+	<key>NSWindow Frame iTerm Window 3</key>
+	<string>3 12 1900 519 0 0 1920 1057 </string>
 	<key>NeverWarnAboutShortLivedSessions_2778671C-D714-496F-950A-35150C457E40</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_E18684C7-F1AE-43DA-BB9E-4303A9E52865</key>
@@ -2030,10 +2032,12 @@
 			<string>/Users/civisemployee/console</string>
 		</dict>
 	</array>
+	<key>NoSyncHaveShownPromoWithId_4</key>
+	<true/>
 	<key>NoSyncTimeOfLastPromo</key>
-	<real>472503707.57876402</real>
+	<real>477862791.69491702</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>475085264.96284199</real>
+	<real>490743908.84562498</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -2096,7 +2100,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-01-22T16:07:25Z</date>
+	<date>2016-07-22T14:26:44Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -2127,6 +2131,10 @@
 	<true/>
 	<key>UseLionStyleFullscreen</key>
 	<true/>
+	<key>WebKitDefaultFontSize</key>
+	<integer>11</integer>
+	<key>WebKitStandardFont</key>
+	<string>.AppleSystemUIFont</string>
 	<key>WindowNumber</key>
 	<true/>
 	<key>WindowStyle</key>

@@ -265,7 +265,7 @@ user code."
   (defun private/open-local-platform-in-browser ()
     "Open a browser window to local civis"
     (interactive)
-    (browse-url "http://platform.civis.local:3000")
+    (browse-url "http://platform.civis.dev:3000")
     )
   (defun private/show-and-copy-buffer-filename-from-root ()
     "Show the relative path to the current file in the minibuffer."
@@ -358,7 +358,7 @@ layers configuration. You are free to put any user code."
  '(eshell-history-size 10000 t)
  '(evil-ex-visual-char-range t)
  '(exec-path-from-shell-arguments (quote ("-l")))
- '(fci-rule-color "#49483E")
+ '(fci-rule-color "#49483E" t)
  '(flycheck-coffeelintrc "coffeelint.json")
  '(flycheck-disabled-checkers (quote (haml)))
  '(font-latex-fontify-sectioning (quote color))
@@ -403,6 +403,14 @@ layers configuration. You are free to put any user code."
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
  '(org-M-RET-may-split-line (quote ((default))))
+ '(org-babel-load-languages
+   (quote
+    ((emacs-lisp . t)
+     (shell . t)
+     (python . t)
+     (ruby . t)
+     (R . t))))
+ '(org-confirm-babel-evaluate nil)
  '(org-export-backends (quote (ascii html latex odt)))
  '(org-export-headline-levels 1)
  '(persp-init-new-frame-behaviour-override nil)

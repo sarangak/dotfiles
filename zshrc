@@ -49,7 +49,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bundler osx rake ruby)
+plugins=(git history-substring-search bundler osx rake ruby)
 
 # User configuration
 # Moved to .zshenv
@@ -90,7 +90,7 @@ alias vgd="vagrant destroy"
 alias vgst="vagrant status"
 alias vgs="vagrant ssh"
 alias rb="vagrant ssh -c 'bundle'"
-alias rs="vagrant ssh -c 'spring stop; bundle exec rails server -b 0.0.0.0'"
+alias rs="vagrant ssh -c 'DISABLE_SPRING=1 bundle exec rails server -b 0.0.0.0'"
 alias rw="vagrant ssh -c 'bundle exec rake jobs:work'"
 alias rc="vagrant ssh -c 'bundle exec rails console'"
 alias rd="vagrant ssh -c 'docker-compose up -d'"
@@ -117,3 +117,11 @@ alias emacs="/usr/local/Cellar/emacs-mac/emacs-24.5-z-mac-5.13/Emacs.app/Content
 eval "$(rbenv init -)"
 
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+# History substring search
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+
+# Commenting these out because they increase load times
+# export NVM_DIR="/Users/civisemployee/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

@@ -66,6 +66,35 @@
       <autogen>__KeyToKey__ KeyCode::L, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_COMMAND | ModifierFlag::NONE, ConsumerKeyCode::POWER, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_CONTROL | MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_SHIFT  </autogen>
 </item>
 
+<item>
+      <name>Simultaneous Key Presses [A+S] to Control_L+Command_L (for use with various shortcuts)</name>
+      <appendix>(Hit A+S at the same time, rolling won't work)</appendix>
+      <identifier>private.simultaneouskeypresses_as2controlLcommandL</identifier>
+      <autogen>__SimultaneousKeyPresses__ KeyCode::A, KeyCode::S, KeyCode::CONTROL_L, ModifierFlag::COMMAND_L</autogen>
+</item>
+
+<item>
+      <name>Simultaneous Key Presses [S+D] to Command_L+Option_L (for use with various shortcuts)</name>
+      <appendix>(Hit S+D at the same time, rolling won't work)</appendix>
+      <identifier>private.simultaneouskeypresses_sd2optionLcommandL</identifier>
+      <autogen>__SimultaneousKeyPresses__ KeyCode::S, KeyCode::D, KeyCode::COMMAND_L, ModifierFlag::OPTION_L</autogen>
+</item>
+
+<item>
+      <name>Simultaneous Key Presses [A+S+J] to AS (because otherwise it is hard to type those keys not simultaneously)</name>
+      <appendix>(Hit A+S+J at the same time, rolling won't work)</appendix>
+      <identifier>private.simultaneouskeypresses_asj2as</identifier>
+      <autogen>
+	__SimultaneousKeyPresses__
+	@begin
+	KeyCode::A, KeyCode::S, KeyCode::J,
+	@end
+
+	@begin
+	KeyCode::A, KeyCode::S,
+	@end
+      </autogen>
+</item>
 
 
 </root>

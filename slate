@@ -22,7 +22,8 @@ alias bigCenter move screenOriginX+screenSizeX/12;screenOriginY+screenSizeY/12 1
 bind b:cmd;alt focus 'Google Chrome'
 bind h:cmd;alt focus 'HipChat'
 bind space:cmd;alt focus 'Emacs'
-bind t:cmd;alt focus 'iTerm'
+bind t:cmd;alt focus 'iTerm2'
+bind m:cmd;alt focus 'iTerm2'
 
 # The triple keys
 alias triple ctrl;alt;cmd
