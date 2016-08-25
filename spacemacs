@@ -281,6 +281,12 @@ user code."
     "Align the given region for key: value content"
     (interactive)
     (align-regexp beg end ":\\(\\s-*\\)" 1 1 nil))
+  (defun private/evil-select-pasted ()
+    "Visually select last pasted text."
+    (interactive)
+    (evil-goto-mark ?[)
+    (evil-visual-char)
+    (evil-goto-mark ?]))
 )
 
 (defun dotspacemacs/user-config ()
@@ -297,6 +303,7 @@ layers configuration. You are free to put any user code."
   (evil-leader/set-key "ot" 'private/projectile-eshell-in-root)
   (evil-leader/set-key "oy" 'private/show-and-copy-buffer-filename-from-root)
   (evil-leader/set-key "oc" 'private/open-local-platform-in-browser)
+  (evil-leader/set-key "ov" 'private/evil-select-pasted)
   (global-set-key (kbd "C-'") 'toggle-quotes)
   ;; Wrap lines in text modes (including Org mode)
   (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
@@ -333,6 +340,12 @@ layers configuration. You are free to put any user code."
   (define-key evil-motion-state-map [C-i] 'evil-jump-forward)
   ;; I couldn't get this to work with rspec
   ;; (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
+  (with-eval-after-load 'org
+    (progn
+      ;; Originally used the following but it is overwritten by ox-reveal for speaker notes blocks
+      ;; (add-to-list 'org-structure-template-alist '("n" "#+NAME: ?"))
+      (require 'ox-reveal)
+      ))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -411,7 +424,6 @@ layers configuration. You are free to put any user code."
      (ruby . t)
      (R . t))))
  '(org-confirm-babel-evaluate nil)
- '(org-export-backends (quote (ascii html latex odt)))
  '(org-export-headline-levels 1)
  '(org-startup-folded nil)
  '(persp-init-new-frame-behaviour-override nil)
