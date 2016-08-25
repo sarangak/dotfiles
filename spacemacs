@@ -43,7 +43,7 @@ values."
              python-enable-yapf-format-on-save t
              python-auto-set-local-pyenv-version 'on-project-switch)
      ranger
-     ruby
+     (ruby :variables ruby-version-manager 'rbenv)
      ruby-on-rails
      (shell :variables
             shell-default-position 'bottom
@@ -413,6 +413,7 @@ layers configuration. You are free to put any user code."
  '(org-confirm-babel-evaluate nil)
  '(org-export-backends (quote (ascii html latex odt)))
  '(org-export-headline-levels 1)
+ '(org-startup-folded nil)
  '(persp-init-new-frame-behaviour-override nil)
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
