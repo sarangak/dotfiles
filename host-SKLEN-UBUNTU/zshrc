@@ -118,3 +118,10 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 # History substring search
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
+
+# Google Cloud SDK
+# The next line updates PATH for the Google Cloud SDK.
+source '/home/saranga/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/home/saranga/google-cloud-sdk/completion.zsh.inc'
