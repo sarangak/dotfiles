@@ -58,7 +58,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(ruby-refactor toggle-quotes jira-markup-mode ox-jira evil-smartparens ox-reveal)
+   dotspacemacs-additional-packages '(ruby-refactor toggle-quotes jira-markup-mode ox-jira ox-reveal)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(evil-search-highlight-persist)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -297,7 +297,6 @@ layers configuration. You are free to put any user code."
    evil-escape-delay 0.2
    multi-term-program "/usr/local/bin/zsh"
    )
-  (delete-selection-mode 1)
   (evil-leader/set-key "of" 'make-frame)
   (evil-leader/set-key "ob" 'spacemacs/new-empty-buffer)
   (evil-leader/set-key "ot" 'private/projectile-eshell-in-root)
@@ -346,6 +345,17 @@ layers configuration. You are free to put any user code."
       ;; (add-to-list 'org-structure-template-alist '("n" "#+NAME: ?"))
       (require 'ox-reveal)
       ))
+  ;; Enable autocompletion everywhere
+  (global-company-mode)
+  ;; Ask to turn off extra modes when editing large files
+  ;; From https://github.com/syl20bnr/spacemacs/issues/3491#issuecomment-150478925
+  (defun spacemacs/check-large-file ()
+    (when (> (buffer-size) (* 1024 1024))
+      (when (y-or-n-p "This is a large file, open literally to avoid performance problems?")
+        (setq buffer-read-only t)
+        (buffer-disable-undo)
+        (fundamental-mode))))
+  (add-hook 'find-file-hook 'spacemacs/check-large-file)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
