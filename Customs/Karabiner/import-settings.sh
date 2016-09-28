@@ -20,8 +20,6 @@ $cli set private.simultaneouskeypresses_as2controlLcommandL 1
 /bin/echo -n .
 $cli set private.simultaneouskeypresses_asj2as 1
 /bin/echo -n .
-$cli set private.simultaneouskeypresses_sd2optionLcommandL 1
-/bin/echo -n .
 $cli set private.simultaneouskeypresses_xc2controlLcommandL 1
 /bin/echo -n .
 $cli set remap.control_delete_to_option_delete_winstyle 1
@@ -35,6 +33,8 @@ $cli set remap.new_winstyle_no_term 1
 $cli set remap.pc_style_copy_paste 1
 /bin/echo -n .
 $cli set remap.pclikecontrolleftright_except_vm 1
+/bin/echo -n .
+$cli set remap.pclikehomeend_emacs 1
 /bin/echo -n .
 $cli set remap.pclikeshiftdelte_except_vm 1
 /bin/echo -n .

@@ -515,6 +515,8 @@
 	<string></string>
 	<key>NSScrollAnimationEnabled</key>
 	<false/>
+	<key>NSScrollViewShouldScrollUnderTitlebar</key>
+	<false/>
 	<key>NSTableView Columns KeyBingingTable</key>
 	<array>
 		<data>
@@ -526,7 +528,7 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>304</string>
+		<string>322</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
@@ -539,14 +541,18 @@
 	</dict>
 	<key>NSWindow Frame Preferences</key>
 	<string>317 515 924 485 0 0 1920 1057 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>650 499 620 392 0 0 1920 1057 </string>
+	<key>NSWindow Frame SharedPreferences</key>
+	<string>40 197 796 473 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 628 1920 429 0 0 1920 1057 </string>
+	<string>0 585 585 452 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>960 4 960 1053 0 0 1920 1057 </string>
+	<string>1 317 570 452 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>2 531 1918 526 0 0 1920 1057 </string>
+	<string>3 287 1193 384 0 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>3 12 1900 519 0 0 1920 1057 </string>
+	<string>2 325 570 452 0 0 1280 777 </string>
 	<key>NeverWarnAboutShortLivedSessions_2778671C-D714-496F-950A-35150C457E40</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_E18684C7-F1AE-43DA-BB9E-4303A9E52865</key>
@@ -1148,6 +1154,8 @@
 				<key>text</key>
 				<string></string>
 			</dict>
+			<key>Send Bell Alert</key>
+			<true/>
 			<key>Send Code When Idle</key>
 			<false/>
 			<key>Set Local Environment Vars</key>
@@ -1256,24 +1264,32 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.22298215329647064</real>
+			<real>0.37943786705386706</real>
 			<key>Triggers</key>
 			<array>
 				<dict>
 					<key>action</key>
 					<string>BounceTrigger</string>
+					<key>parameter</key>
+					<integer>0</integer>
+					<key>partial</key>
+					<true/>
 					<key>regex</key>
 					<string>\a</string>
 				</dict>
 				<dict>
 					<key>action</key>
 					<string>BounceTrigger</string>
+					<key>partial</key>
+					<true/>
 					<key>regex</key>
 					<string>\*\s+Listening on tcp</string>
 				</dict>
 				<dict>
 					<key>action</key>
 					<string>BounceTrigger</string>
+					<key>partial</key>
+					<true/>
 					<key>regex</key>
 					<string>=&gt;\s+\d+:\s+binding.pry</string>
 				</dict>
@@ -2032,8 +2048,18 @@
 			<string>/Users/civisemployee/console</string>
 		</dict>
 	</array>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
+	<true/>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
+	<integer>0</integer>
 	<key>NoSyncHaveShownPromoWithId_4</key>
 	<true/>
+	<key>NoSyncInstallationId</key>
+	<string>0B4E62EB-AC5F-4F19-B6A7-D306D43C856F</string>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
+	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
+	<real>490890545.47367603</real>
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>477862791.69491702</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
@@ -2050,6 +2076,8 @@
 	<false/>
 	<key>PasteFromClipboard</key>
 	<false/>
+	<key>PasteTabToStringTabStopSize</key>
+	<integer>4</integer>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -2095,12 +2123,14 @@
 	<integer>3</integer>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
+	<key>SUFeedAlternateAppNameKey</key>
+	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=16</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-07-22T14:26:44Z</date>
+	<date>2016-09-25T01:30:41Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -2110,7 +2140,7 @@
 	<key>SmartPlacement</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.60000002384185791</real>
+	<real>0.59999999999999998</real>
 	<key>SwitchTabModifier</key>
 	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
@@ -2121,6 +2151,10 @@
 	<false/>
 	<key>TmuxDashboardLimit</key>
 	<integer>10</integer>
+	<key>ToolbeltTools</key>
+	<array>
+		<string>Profiles</string>
+	</array>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
 	<key>URLHandlersByGuid</key>
@@ -2146,6 +2180,8 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.1.4</string>
+	<string>3.0.10</string>
+	<key>moveToApplicationsFolderAlertSuppress</key>
+	<true/>
 </dict>
 </plist>

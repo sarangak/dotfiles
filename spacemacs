@@ -309,7 +309,7 @@ layers configuration. You are free to put any user code."
   ;; Treat underscore as a symbol in Ruby so autocomplete includes whole identifiers
   (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "_")))
   (add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch)
-  (setq frame-inherited-parameters '(left top width height))
+  ;; (setq frame-inherited-parameters '(left top width height))
   ;; For edit-with-chrome
   (setq edit-server-url-major-mode-alist
         '(("github\\.com" . gfm-mode)
@@ -347,15 +347,6 @@ layers configuration. You are free to put any user code."
       ))
   ;; Enable autocompletion everywhere
   (global-company-mode)
-  ;; Ask to turn off extra modes when editing large files
-  ;; From https://github.com/syl20bnr/spacemacs/issues/3491#issuecomment-150478925
-  (defun spacemacs/check-large-file ()
-    (when (> (buffer-size) (* 1024 1024))
-      (when (y-or-n-p "This is a large file, open literally to avoid performance problems?")
-        (setq buffer-read-only t)
-        (buffer-disable-undo)
-        (fundamental-mode))))
-  (add-hook 'find-file-hook 'spacemacs/check-large-file)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -366,6 +357,7 @@ layers configuration. You are free to put any user code."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-disable-faces nil)
+ '(avy-subword-extra-word-chars nil)
  '(coffee-indent-like-python-mode t)
  '(company-idle-delay 0)
  '(compilation-message-face (quote default))
@@ -381,15 +373,16 @@ layers configuration. You are free to put any user code."
  '(eshell-history-size 10000 t)
  '(evil-ex-visual-char-range t)
  '(exec-path-from-shell-arguments (quote ("-l")))
- '(fci-rule-color "#49483E" t)
+ '(fci-rule-color "#49483E")
  '(flycheck-coffeelintrc "coffeelint.json")
  '(flycheck-disabled-checkers (quote (haml)))
  '(font-latex-fontify-sectioning (quote color))
+ '(frame-resize-pixelwise t)
  '(global-subword-mode t)
  '(grep-find-ignored-directories
    (quote
     ("SCCS" "RCS" "CVS" "MCVS" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "log" "vendor")))
- '(helm-ag-command-option "-i --ignore=vendor")
+ '(helm-ag-command-option "-S --ignore=vendor")
  '(helm-grep-ignored-directories
    (quote
     ("SCCS" "RCS" "CVS" "MCVS" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".gvfs" "log" "vendor")))
@@ -416,8 +409,6 @@ layers configuration. You are free to put any user code."
  '(hl-fg-colors
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
- '(mac-command-modifier (quote super))
- '(mac-option-modifier (quote meta))
  '(magit-diff-use-overlays nil)
  '(multi-term-dedicated-close-back-to-open-buffer-p t)
  '(multi-term-scroll-to-bottom-on-output t)
@@ -425,6 +416,8 @@ layers configuration. You are free to put any user code."
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#546E00" "#B4C342" "#00629D" "#2aa198" "#d33682" "#6c71c4")))
+ '(ns-alternate-modifier (quote meta))
+ '(ns-command-modifier (quote super))
  '(org-M-RET-may-split-line (quote ((default))))
  '(org-babel-load-languages
    (quote
@@ -433,12 +426,17 @@ layers configuration. You are free to put any user code."
      (python . t)
      (ruby . t)
      (R . t))))
+ '(org-blank-before-new-entry (quote ((heading) (plain-list-item))))
  '(org-confirm-babel-evaluate nil)
  '(org-export-headline-levels 1)
  '(org-startup-folded nil)
+ '(package-selected-packages
+   (quote
+    (ws-butler web-mode spacemacs-theme spaceline projectile-rails persp-mode org-plus-contrib open-junk-file neotree leuven-theme js2-refactor indent-guide help-fns+ helm-themes helm-pydoc helm-projectile helm-descbinds helm-ag google-translate evil-surround ace-link ace-jump-helm-line ess iedit smartparens undo-tree flycheck go-mode projectile helm helm-core markdown-mode magit git-commit hydra f s which-key yaml-mode xterm-color with-editor window-numbering web-beautify volatile-highlights vi-tilde-fringe use-package toggle-quotes toc-org tagedit smooth-scrolling smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-refactor rubocop rspec-mode robe restart-emacs rbenv ranger rake rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-yapf powerline popwin pkg-info pip-requirements paradox page-break-lines ox-reveal ox-jira orgit org-repo-todo org-present org-pomodoro org-bullets multiple-cursors multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative less-css-mode julia-mode json-mode js2-mode js-doc jira-markup-mode jade-mode info+ inflections ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-mode-manager helm-make helm-gitignore helm-flyspell helm-flx helm-css-scss helm-company helm-c-yasnippet golden-ratio go-eldoc gnuplot gmail-message-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger gh-md flycheck-pos-tip flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-tutor evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu ess-smart-equals ess-R-object-popup ess-R-data-view eshell-prompt-extras esh-help emmet-mode elisp-slime-nav edit-server define-word cython-mode company-web company-tern company-statistics company-quickhelp company-go company-auctex company-anaconda coffee-mode clean-aindent-mode chruby bundler buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ac-ispell)))
  '(persp-init-new-frame-behaviour-override nil)
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
+ '(powerline-default-separator (quote alternate))
  '(projectile-enable-caching t)
  '(reftex-plug-into-AUCTeX (quote (t nil t t t)) t)
  '(ruby-refactor-add-parens t)

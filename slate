@@ -19,22 +19,23 @@ alias center move screenOriginX+screenSizeX/12;screenOriginY+screenSizeY/12 5*sc
 alias bigCenter move screenOriginX+screenSizeX/12;screenOriginY+screenSizeY/12 10*screenSizeX/12;10*screenSizeY/12
 
 # Bind command+option+b to google chrome
-bind b:cmd;alt focus 'Google Chrome'
-bind h:cmd;alt focus 'HipChat'
-bind space:cmd;alt focus 'Emacs'
-bind t:cmd;alt focus 'iTerm2'
-bind m:cmd;alt focus 'iTerm2'
+alias focuskeys ctrl;alt
+bind b:${focuskeys} focus 'Google Chrome'
+bind h:${focuskeys} focus 'HipChat'
+bind space:${focuskeys} focus 'Emacs'
+bind t:${focuskeys} focus 'iTerm2'
+bind m:${focuskeys} focus 'iTerm2'
 
 # The triple keys
 alias triple ctrl;alt;cmd
 # alias quadruple alt;ctrl;shift;cmd
-alias move ctrl;cmd
+# alias move ctrl;cmd
 
 # Focus bindings
-bind k:${move}  focus up
-bind j:${move}  focus down
-bind h:${move}  focus left
-bind l:${move}  focus right
+# bind k:${move}  focus up
+# bind j:${move}  focus down
+# bind h:${move}  focus left
+# bind l:${move}  focus right
 
 # Location bindings
 bind h:${triple} ${lefthalf}
