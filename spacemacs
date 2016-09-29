@@ -26,6 +26,7 @@ values."
      auto-completion
      ;; better-defaults
      chrome
+     clojure
      emacs-lisp
      ess
      eyebrowse
