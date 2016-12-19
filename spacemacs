@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     csv
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -52,6 +53,7 @@ values."
      latex
      markdown
      (org :variables
+          org-enable-reveal-js-support t
           org-enable-github-support t)
      (python :variables
              python-enable-yapf-format-on-save t
@@ -71,7 +73,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(ox-reveal ruby-refactor toggle-quotes jira-markup-mode ox-jira)
+   dotspacemacs-additional-packages '(ruby-refactor toggle-quotes jira-markup-mode ox-jira)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -369,6 +371,8 @@ layers configuration. You are free to put any user code."
   ;; Treat underscore as a symbol in Ruby so autocomplete includes whole identifiers
   (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "_")))
   (add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch)
+  ;; Fix Coffeescript indentation - NOTE: doesn't work
+  ;; (add-hook 'coffee-mode-hook (lambda () (setq indent-line-function 'coffee-indent-line)))
   ;; (setq frame-inherited-parameters '(left top width height))
   ;; For edit-with-chrome
   (setq edit-server-url-major-mode-alist
@@ -435,7 +439,7 @@ layers configuration. You are free to put any user code."
  '(evil-ex-visual-char-range t)
  '(evil-want-Y-yank-to-eol t)
  '(exec-path-from-shell-arguments (quote ("-l")))
- '(fci-rule-color "#49483E")
+ '(fci-rule-color "#49483E" t)
  '(flycheck-coffeelintrc "coffeelint.json")
  '(flycheck-disabled-checkers (quote (haml)))
  '(font-latex-fontify-sectioning (quote color))
@@ -496,12 +500,15 @@ layers configuration. You are free to put any user code."
  '(org-startup-indented t)
  '(package-selected-packages
    (quote
-    (hc-zenburn-theme solarized-theme anzu helm helm-core dash sublime-themes minitest hide-comnt auctex-latexmk smartparens ox-reveal rake org alert log4e gntp skewer-mode simple-httpd json-snatcher json-reformat js2-mode haml-mode ham-mode markdown-mode html-to-markdown gitignore-mode flyspell-correct pos-tip flycheck magit magit-popup git-commit with-editor ctable ess julia-mode web-completion-data dash-functional tern go-mode company inflections edn multiple-cursors paredit peg cider queue clojure-mode inf-ruby yasnippet auctex anaconda-mode pythonic auto-complete evil-search-highlight-persist yapfify yaml-mode xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toggle-quotes toc-org tagedit spacemacs-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-refactor rubocop rspec-mode robe restart-emacs rbenv ranger rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort pug-mode projectile-rails popwin pip-requirements persp-mode paradox ox-jira ox-gfm orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc jira-markup-mode jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot gmail-message-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu ess-smart-equals ess-R-object-popup ess-R-data-view eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav edit-server dumb-jump define-word cython-mode company-web company-tern company-statistics company-go company-auctex company-anaconda column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu chruby bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (bind-map powerline hydra seq spinner request pcre2el csv-mode pcache highlight async projectile go-guru iedit hc-zenburn-theme solarized-theme anzu helm helm-core dash sublime-themes minitest hide-comnt auctex-latexmk smartparens ox-reveal rake org alert log4e gntp skewer-mode simple-httpd json-snatcher json-reformat js2-mode haml-mode ham-mode markdown-mode html-to-markdown gitignore-mode flyspell-correct pos-tip flycheck magit magit-popup git-commit with-editor ctable ess julia-mode web-completion-data dash-functional tern go-mode company inflections edn multiple-cursors paredit peg cider queue clojure-mode inf-ruby yasnippet auctex anaconda-mode pythonic auto-complete evil-search-highlight-persist yapfify yaml-mode xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toggle-quotes toc-org tagedit spacemacs-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-refactor rubocop rspec-mode robe restart-emacs rbenv ranger rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort pug-mode projectile-rails popwin pip-requirements persp-mode paradox ox-jira ox-gfm orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc jira-markup-mode jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot gmail-message-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu ess-smart-equals ess-R-object-popup ess-R-data-view eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav edit-server dumb-jump define-word cython-mode company-web company-tern company-statistics company-go company-auctex company-anaconda column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu chruby bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
+ '(projectile-enable-caching t)
+ '(shell-file-name "bash")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
+ '(tramp-default-method "scp")
  '(vc-annotate-background nil)
  '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map

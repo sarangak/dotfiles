@@ -125,3 +125,5 @@ bindkey -M emacs '^N' history-substring-search-down
 # Commenting these out because they increase load times
 # export NVM_DIR="/Users/civisemployee/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+PROMPT='${ret_status} %D %* %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
