@@ -31,7 +31,6 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     csv
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -139,7 +138,6 @@ values."
    ;; `recents' `bookmarks' `projects' `agenda' `todos'."
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   ;; (default nil)
    dotspacemacs-startup-lists '((recents . 5)
                                 (projects . 7))
    ;; True if the home buffer should respond to resize events.
@@ -171,7 +169,7 @@ values."
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
    ;; (default "SPC")
-   dotspacemacs-emacs-command-key "SPC"
+   dotspacemacs-emacs-command-key ":"
    ;; The key used for Vim Ex commands (default ":")
    dotspacemacs-ex-command-key ":"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -360,6 +358,8 @@ layers configuration. You are free to put any user code."
    evil-escape-delay 0.2
    multi-term-program "/usr/local/bin/zsh"
    )
+  (spacemacs/set-leader-keys
+    "SPC" 'evil-avy-goto-word-or-subword-1)
   (evil-leader/set-key "of" 'make-frame)
   (evil-leader/set-key "ob" 'spacemacs/new-empty-buffer)
   (evil-leader/set-key "ot" 'private/projectile-eshell-in-root)
