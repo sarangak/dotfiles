@@ -429,11 +429,51 @@ layers configuration. You are free to put any user code."
   ;; Enable autocompletion everywhere
   (global-company-mode)
   (evil-visual-mark-mode)
-  ;; Add current point to jump list when using a count jump.  Used with relative numbering.
+  ;; Add current point to jump list when using a count jump which is often used with relative numbering.
   (defun my-evil-set-jump (&rest args)
     (if (and (car args) (< 1 (car args))) (evil-set-jump)))
   (advice-add 'evil-previous-line :before 'my-evil-set-jump)
   (advice-add 'evil-next-line :before 'my-evil-set-jump)
+
+  ;; From
+  ;; https://github.com/syohex/evil-textobj-line/blob/master/evil-textobj-line.el
+  ;; which doesn't seem to be in MELPA :(
+  (defgroup evil-textobj-line nil
+    "Text object line for Evil"
+    :group 'evil)
+
+  (defcustom evil-textobj-line-i-key "l"
+    "Keys for evil-inner-line"
+    :type 'string
+    :group 'evil-textobj-line)
+
+  (defcustom evil-textobj-line-a-key "l"
+    "Keys for evil-a-line"
+    :type 'string
+    :group 'evil-textobj-line)
+
+  (defun evil-line-range (count beg end type &optional inclusive)
+    (if inclusive
+        (evil-range (line-beginning-position) (line-end-position))
+      (let ((start (save-excursion
+                     (back-to-indentation)
+                     (point)))
+            (end (save-excursion
+                   (goto-char (line-end-position))
+                   (skip-syntax-backward " " (line-beginning-position))
+                   (point))))
+        (evil-range start end))))
+
+  (evil-define-text-object evil-a-line (count &optional beg end type)
+    "Select range between a character by which the command is followed."
+    (evil-line-range count beg end type t))
+  (evil-define-text-object evil-inner-line (count &optional beg end type)
+    "Select inner range between a character by which the command is followed."
+    (evil-line-range count beg end type))
+
+  (define-key evil-outer-text-objects-map evil-textobj-line-a-key 'evil-a-line)
+  (define-key evil-inner-text-objects-map evil-textobj-line-i-key 'evil-inner-line)
+  ;; END evil-textobj-line
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -462,7 +502,7 @@ layers configuration. You are free to put any user code."
  '(eshell-history-size 10000 t)
  '(evil-ex-visual-char-range t)
  '(evil-want-Y-yank-to-eol t)
- '(exec-path-from-shell-arguments (quote ("-l")))
+ '(exec-path-from-shell-shell-name "/usr/local/bin/zsh")
  '(fci-rule-color "#49483E" t)
  '(flycheck-coffeelintrc "coffeelint.json")
  '(flycheck-disabled-checkers (quote (haml)))
@@ -528,7 +568,7 @@ layers configuration. You are free to put any user code."
  '(org-use-sub-superscripts (quote {}))
  '(package-selected-packages
    (quote
-    (packed evil-snipe bind-key bind-map powerline hydra seq spinner request pcre2el csv-mode pcache highlight async projectile go-guru iedit hc-zenburn-theme solarized-theme anzu helm helm-core dash sublime-themes minitest hide-comnt auctex-latexmk smartparens ox-reveal rake org alert log4e gntp skewer-mode simple-httpd json-snatcher json-reformat js2-mode haml-mode ham-mode markdown-mode html-to-markdown gitignore-mode flyspell-correct pos-tip flycheck magit magit-popup git-commit with-editor ctable ess julia-mode web-completion-data dash-functional tern go-mode company inflections edn multiple-cursors paredit peg cider queue clojure-mode inf-ruby yasnippet auctex anaconda-mode pythonic auto-complete evil-search-highlight-persist yapfify yaml-mode xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toggle-quotes toc-org tagedit spacemacs-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-refactor rubocop rspec-mode robe restart-emacs rbenv ranger rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort pug-mode projectile-rails popwin pip-requirements persp-mode paradox ox-jira ox-gfm orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc jira-markup-mode jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot gmail-message-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu ess-smart-equals ess-R-object-popup ess-R-data-view eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav edit-server dumb-jump define-word cython-mode company-web company-tern company-statistics company-go company-auctex company-anaconda column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu chruby bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (evil avy packed evil-snipe bind-key bind-map powerline hydra seq spinner request pcre2el csv-mode pcache highlight async projectile go-guru iedit hc-zenburn-theme solarized-theme anzu helm helm-core dash sublime-themes minitest hide-comnt auctex-latexmk smartparens ox-reveal rake org alert log4e gntp skewer-mode simple-httpd json-snatcher json-reformat js2-mode haml-mode ham-mode markdown-mode html-to-markdown gitignore-mode flyspell-correct pos-tip flycheck magit magit-popup git-commit with-editor ctable ess julia-mode web-completion-data dash-functional tern go-mode company inflections edn multiple-cursors paredit peg cider queue clojure-mode inf-ruby yasnippet auctex anaconda-mode pythonic auto-complete evil-search-highlight-persist yapfify yaml-mode xterm-color ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toggle-quotes toc-org tagedit spacemacs-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-refactor rubocop rspec-mode robe restart-emacs rbenv ranger rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort pug-mode projectile-rails popwin pip-requirements persp-mode paradox ox-jira ox-gfm orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint less-css-mode json-mode js2-refactor js-doc jira-markup-mode jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot gmail-message-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu ess-smart-equals ess-R-object-popup ess-R-data-view eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav edit-server dumb-jump define-word cython-mode company-web company-tern company-statistics company-go company-auctex company-anaconda column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu chruby bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
  '(projectile-enable-caching t)

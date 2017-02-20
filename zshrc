@@ -53,6 +53,7 @@ plugins=(git history-substring-search bundler osx rake ruby)
 
 # User configuration
 # Moved to .zshenv
+source $HOME/.zshenv
 
 source $ZSH/oh-my-zsh.sh
 
@@ -114,9 +115,6 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Alias Emacs
 alias emacs="/usr/local/Cellar/emacs-mac/emacs-24.5-z-mac-5.13/Emacs.app/Contents/MacOS/Emacs"
 
-eval "$(rbenv init -)"
-
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # History substring search
 bindkey -M emacs '^P' history-substring-search-up
