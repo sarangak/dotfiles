@@ -51,7 +51,8 @@ bind n:${triple} ${topleft}
 bind m:${triple} ${topright}
 
 # Hints
-bind ;:ctrl hint SADFJKLEWCMPGH
+# Superseded by Hammerspoon
+# bind ;:ctrl hint SADFJKLEWCMPGH
 
 # Throw windows
 bind 1:cmd;alt throw 0 resize
