@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/civisemployee/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -113,7 +113,7 @@ alias bcf='bundle; bundle clean --force'
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Alias Emacs
-alias emacs="/usr/local/Cellar/emacs-mac/emacs-24.5-z-mac-5.13/Emacs.app/Contents/MacOS/Emacs"
+# alias emacs="/usr/local/Cellar/emacs-mac/emacs-24.5-z-mac-5.13/Emacs.app/Contents/MacOS/Emacs"
 
 
 # History substring search

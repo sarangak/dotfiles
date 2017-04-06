@@ -506,7 +506,7 @@
 	<key>MaxVertically</key>
 	<false/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Customs</string>
+	<string>~/.dotfiles/Customs</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 459}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -539,20 +539,10 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
-	<key>NSWindow Frame Preferences</key>
-	<string>317 515 924 485 0 0 1920 1057 </string>
-	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>650 499 620 392 0 0 1920 1057 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>40 197 796 473 0 0 1280 777 </string>
+	<string>269 44 918 512 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 585 585 452 0 0 1920 1057 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1 317 570 452 0 0 1280 777 </string>
-	<key>NSWindow Frame iTerm Window 2</key>
-	<string>3 287 1193 384 0 0 1920 1057 </string>
-	<key>NSWindow Frame iTerm Window 3</key>
-	<string>2 325 570 452 0 0 1280 777 </string>
+	<string>504 175 570 452 0 0 1280 777 </string>
 	<key>NeverWarnAboutShortLivedSessions_2778671C-D714-496F-950A-35150C457E40</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_E18684C7-F1AE-43DA-BB9E-4303A9E52865</key>
@@ -777,7 +767,7 @@
 			<key>Custom Command</key>
 			<string>No</string>
 			<key>Custom Directory</key>
-			<string>Yes</string>
+			<string>No</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Disable Printing</key>
@@ -1311,7 +1301,7 @@
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/Users/civisemployee/console</string>
+			<string></string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -1531,7 +1521,7 @@
 			<key>Custom Command</key>
 			<string>No</string>
 			<key>Custom Directory</key>
-			<string>Yes</string>
+			<string>No</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Disable Printing</key>
@@ -2045,25 +2035,19 @@
 			<key>Window Type</key>
 			<integer>2</integer>
 			<key>Working Directory</key>
-			<string>/Users/civisemployee/console</string>
+			<string></string>
 		</dict>
 	</array>
-	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
-	<true/>
-	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
-	<integer>0</integer>
-	<key>NoSyncHaveShownPromoWithId_4</key>
+	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>0B4E62EB-AC5F-4F19-B6A7-D306D43C856F</string>
-	<key>NoSyncPermissionToShowTip</key>
-	<false/>
+	<string>D71AAEEE-EEDA-4EDF-B6FD-4953F3923625</string>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>490890545.47367603</real>
-	<key>NoSyncTimeOfLastPromo</key>
-	<real>477862791.69491702</real>
-	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>490743908.84562498</real>
+	<real>513136090.54803598</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -2112,7 +2096,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/civisemployee/Customs</string>
+	<string>/Users/saranga/.dotfiles/Customs</string>
 	<key>PromptOnQuit</key>
 	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
@@ -2126,11 +2110,13 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml?shard=16</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=17</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-09-25T01:30:41Z</date>
+	<date>2017-04-06T02:19:07Z</date>
+	<key>SUSendProfileInfo</key>
+	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -2180,8 +2166,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.10</string>
-	<key>moveToApplicationsFolderAlertSuppress</key>
-	<true/>
+	<string>3.0.15</string>
 </dict>
 </plist>

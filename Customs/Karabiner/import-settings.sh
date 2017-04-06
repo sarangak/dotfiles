@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cli=/Applications/Karabiner.app/Contents/Library/bin/karabiner
+cli=/usr/local/bin/karabiner
 
 $cli set bilalh.remap.f19_escape_control 1
 /bin/echo -n .
@@ -19,8 +19,6 @@ $cli set private.refresh_with_f5 1
 $cli set private.simultaneouskeypresses_as2controlLcommandL 1
 /bin/echo -n .
 $cli set private.simultaneouskeypresses_asj2as 1
-/bin/echo -n .
-$cli set private.simultaneouskeypresses_xc2controlLcommandL 1
 /bin/echo -n .
 $cli set remap.control_delete_to_option_delete_winstyle 1
 /bin/echo -n .
