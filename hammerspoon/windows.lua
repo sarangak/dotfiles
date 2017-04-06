@@ -16,11 +16,18 @@ hs.window.switcher.ui.showThumbnails = false
 -----------------------------------------------
 -- Switcher
 -----------------------------------------------
-local switcher = hs.window.switcher.new() -- default windowfilter: only visible windows, all Spaces
 
--- bind to hotkeys; WARNING: at least one modifier key is required!
--- NOTE: Using more than modifier key makes things buggy
--- Using Karabiner to remap cmd-tab to ctrl-F4 because Hammerspoon can't currently capture cmd-tab away from macOS
+--[[
+  Command-Tab and Command-Shift-Tab switch forward and backward over all visible
+  windows.
+
+  Option-Tab and Option-Shift-Tab switch forward and backward over the windows
+  of the currently focused application.
+
+--]]
+
+local switcher = hs.window.switcher.new()
+-- NOTE: I'm using Karabiner to remap cmd-tab to ctrl-F4 because Hammerspoon can't currently capture cmd-tab away from macOS
 hs.hotkey.bind({'ctrl'}, 'F4', function()
                  switcher:next()
 end)
@@ -28,9 +35,19 @@ hs.hotkey.bind({'ctrl', 'shift'}, 'F4', function()
                  switcher:previous()
 end)
 
-hs.hotkey.bind({'alt'}, 'tab', function()
-    local current_app = hs.window.focusedWindow():application():name()
-    hs.window.switcher.new({ current_app }):next()
+local mySwitchers = {}
+function currentApplicationSwitcher()
+  local currentApplication = hs.window.focusedWindow():application():name()
+  if mySwitchers[currentApplication] == nil then
+    mySwitchers[currentApplication] = hs.window.switcher.new(currentApplication)
+  end
+  return mySwitchers[currentApplication]
+end
+hs.hotkey.bind('alt', 'tab', function()
+                 currentApplicationSwitcher():next()
+end)
+hs.hotkey.bind('alt-shift', 'tab', function()
+                 currentApplicationSwitcher():previous()
 end)
 
 

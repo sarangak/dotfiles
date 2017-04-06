@@ -12,5 +12,5 @@ export PATH=$PATH:$GOROOT/bin
 export PYENV_ROOT=/usr/local/var/pyenv
 
 # These commands change env vars
-# eval "$(rbenv init -)"
+eval "$(rbenv init -)"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi

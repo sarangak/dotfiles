@@ -575,6 +575,8 @@ layers configuration. You are free to put any user code."
  '(projectile-enable-caching t)
  '(shell-file-name "bash")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
+ '(split-height-threshold nil)
+ '(split-width-threshold 0)
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
  '(tramp-default-method "scp")
