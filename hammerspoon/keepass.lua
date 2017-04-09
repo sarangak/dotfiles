@@ -2,7 +2,7 @@
   First select the username field in the window you want to auto-type into, then
   select KeePass and press Cmd-V.
 ]]
-emulateAutoType = hs.hotkey.new('cmd', 'v', function()
+emulateAutoType = hs.hotkey.new({'cmd', 'shift'}, 'v', function()
   -- Send copy username command
   hs.eventtap.keyStroke({'cmd'}, 'b')
   local username = hs.pasteboard.getContents()
