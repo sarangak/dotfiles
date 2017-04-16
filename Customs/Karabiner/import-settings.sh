@@ -20,6 +20,8 @@ $cli set private.simultaneouskeypresses_as2controlLcommandL 1
 /bin/echo -n .
 $cli set private.simultaneouskeypresses_asj2as 1
 /bin/echo -n .
+$cli set remap.command_tab_to_control_f4 1
+/bin/echo -n .
 $cli set remap.control_delete_to_option_delete_winstyle 1
 /bin/echo -n .
 $cli set remap.copy_paste_winstyle_new_browser_tab 1
