@@ -18,14 +18,6 @@ alias bottomright corner bottom-right resize:screenSizeX/2;screenSizeY/2
 alias center move screenOriginX+screenSizeX/12;screenOriginY+screenSizeY/12 5*screenSizeX/6;5*screenSizeY/6
 alias bigCenter move screenOriginX+screenSizeX/12;screenOriginY+screenSizeY/12 10*screenSizeX/12;10*screenSizeY/12
 
-# Bind command+option+b to google chrome
-alias focuskeys ctrl;alt
-bind b:${focuskeys} focus 'Google Chrome'
-bind h:${focuskeys} focus 'HipChat'
-bind space:${focuskeys} focus 'Emacs'
-bind t:${focuskeys} focus 'iTerm2'
-bind m:${focuskeys} focus 'iTerm2'
-
 # The triple keys
 alias triple ctrl;alt;cmd
 # alias quadruple alt;ctrl;shift;cmd
@@ -49,10 +41,6 @@ bind b:${triple} ${bottomleft}
 bind ,:${triple} ${bottomright}
 bind n:${triple} ${topleft}
 bind m:${triple} ${topright}
-
-# Hints
-# Superseded by Hammerspoon
-# bind ;:ctrl hint SADFJKLEWCMPGH
 
 # Throw windows
 bind 1:cmd;alt throw 0 resize

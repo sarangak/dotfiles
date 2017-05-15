@@ -64,3 +64,32 @@ hs.hotkey.bind({"ctrl", "alt"}, ';', function()
     hs.hints.windowHints(hs.window.focusedWindow():application():allWindows())
     hs.hints.showTitleThresh = 0
 end)
+
+
+-----------------------------------------------
+-- Quickswitch by app
+-----------------------------------------------
+local focusKeys = {'ctrl', 'alt'}
+hs.fnutils.each({
+    { key = "b", app = 'Google Chrome' },
+    { key = "h", app = 'HipChat' },
+    { key = "m", app = "iTerm" },
+    { key = "space", app = "Emacs" },
+  },
+  function(object)
+    hs.hotkey.bind(focusKeys, object.key, function()
+      hs.application.launchOrFocus(object.app)
+    end)
+end)
+
+-- Make focusKeys + o switch to the Vimium tab selector
+-- NOTES:
+-- - Assumes that your Chrome windows have the "New Tab" page open as the first
+--   tab and the focus is not in the omnibar
+-- - ctrl+alt+t was my first choice for a keybinding but it is swallowed by
+--   Chrome (doesn't make it to Hammerspoon if Chrome is focused)
+hs.hotkey.bind(focusKeys, "o", nil, function()
+                 hs.application.launchOrFocus('Google Chrome')
+                 hs.eventtap.keyStroke({'cmd'}, "1")
+                 hs.eventtap.keyStroke({'shift'}, 't')
+end)
