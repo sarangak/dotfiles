@@ -1,5 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
+# User configuration
+# Moved to .zshenv
+source $HOME/.zshenv
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -50,10 +53,6 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git history-substring-search bundler osx rake ruby)
-
-# User configuration
-# Moved to .zshenv
-source $HOME/.zshenv
 
 source $ZSH/oh-my-zsh.sh
 
