@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AboutToPasteTabsWithCancel</key>
+	<true/>
+	<key>AboutToPasteTabsWithCancel_selection</key>
+	<integer>0</integer>
 	<key>AdjustWindowForFontSizeChange</key>
 	<true/>
 	<key>AllowClipboardAccess</key>
@@ -540,9 +544,13 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>269 44 918 512 0 0 1280 777 </string>
+	<string>269 296 1018 447 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>504 175 570 452 0 0 1280 777 </string>
+	<string>1 19 640 758 0 0 1280 777 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>2 393 1277 384 0 0 1280 777 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>2 393 1277 384 0 0 1280 777 </string>
 	<key>NeverWarnAboutShortLivedSessions_2778671C-D714-496F-950A-35150C457E40</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_E18684C7-F1AE-43DA-BB9E-4303A9E52865</key>
@@ -2099,6 +2107,10 @@
 	<string>/Users/saranga/.dotfiles/Customs</string>
 	<key>PromptOnQuit</key>
 	<true/>
+	<key>QuickPasteBytesPerCall</key>
+	<integer>675</integer>
+	<key>QuickPasteDelayBetweenCalls</key>
+	<real>0.015151514671742916</real>
 	<key>QuitWhenAllWindowsClosed</key>
 	<false/>
 	<key>RightCommand</key>
@@ -2114,7 +2126,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-04-06T02:19:07Z</date>
+	<date>2017-05-20T01:42:26Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -2126,7 +2138,7 @@
 	<key>SmartPlacement</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.59999999999999998</real>
+	<real>0.40826822916666672</real>
 	<key>SwitchTabModifier</key>
 	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
