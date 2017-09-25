@@ -11,7 +11,9 @@ export PATH=$PATH:$GOROOT/bin
 
 export PYENV_ROOT=/usr/local/var/pyenv
 
+export VAGRANT_FORWARD_MYSQL_PORT=13306
+
 # These commands change env vars
 eval "$(rbenv init -)"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-. ~/.nix-profile/etc/profile.d/nix.sh
+. /Users/civisemployee/.nix-profile/etc/profile.d/nix.sh

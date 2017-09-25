@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     csv
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -397,6 +398,12 @@ layers configuration. You are free to put any user code."
   ;; Treat underscore as a symbol in Ruby so autocomplete includes whole identifiers
   (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "_")))
   (add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch)
+  ;; Fix Coffeescript indentation per https://github.com/syl20bnr/spacemacs/issues/7682#issuecomment-314691091
+  ;; Remove spacemacs hook for coffee-mode
+  (remove-hook 'coffee-mode-hook '(lambda ()
+                                    (setq indent-line-function 'javascript/coffee-indent
+                                          evil-shift-width coffee-tab-width)))
+
   ;; For edit-with-chrome
   (setq edit-server-url-major-mode-alist
         '(("github\\.com" . gfm-mode)
@@ -517,7 +524,7 @@ layers configuration. You are free to put any user code."
  '(evil-want-fine-undo t)
  '(exec-path-from-shell-check-startup-files nil)
  '(exec-path-from-shell-shell-name "/usr/local/bin/zsh")
- '(fci-rule-color "#49483E" t)
+ '(fci-rule-color "#49483E")
  '(flycheck-coffeelintrc "coffeelint.json")
  '(flycheck-disabled-checkers (quote (haml)))
  '(font-latex-fontify-sectioning (quote color))

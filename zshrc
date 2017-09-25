@@ -98,7 +98,7 @@ docker_compose_exec() {
     vagrant ssh -c 'docker exec -it $(docker-compose ps | grep '"'$1'"' | head -n 1 | awk '\''{print $1}'\'') '"$*[2,-1]"
 }
 alias vgmd="docker_compose_exec mysql mysqldump console_development > ~/dbbackups/console_dev_`gdate +%s%N`.sql"
-alias rdb="vgmd && vagrant ssh -c 'bundle; bundle exec rake db:migrate'"
+alias rdb="vgmd && vagrant ssh -c 'bundle; npm install; bundle exec rake db:migrate'"
 alias gcod="git checkout -- db/schema.rb"
 unalias rspec
 rspec () { vagrant ssh -c "bundle exec rspec --format documentation --order default --fail-fast $*" }
