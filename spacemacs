@@ -187,7 +187,9 @@ values."
    dotspacemacs-major-mode-leader-key ","
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
    ;; (default "C-M-m")
-   dotspacemacs-major-mode-emacs-leader-key "C-M-m"
+   ;; I don't use this and I need M-RET to work in org-mode
+   ;; See https://github.com/syl20bnr/spacemacs/issues/9603
+   dotspacemacs-major-mode-emacs-leader-key "C-S-m"
    ;; These variables control whether separate commands are bound in the GUI to
    ;; the key pairs C-i, TAB and C-m, RET.
    ;; Setting it to a non-nil value, allows for separate commands under <C-i>
@@ -392,8 +394,6 @@ layers configuration. You are free to put any user code."
   ;; using org-mode keys
   (define-key evil-visual-state-map (kbd "M-j") (concat ":m '>+1" (kbd "RET") "gv=gv"))
   (define-key evil-visual-state-map (kbd "M-k") (concat ":m '<-2" (kbd "RET") "gv=gv"))
-  ;; Fix https://github.com/syl20bnr/spacemacs/issues/9603
-  (org-defkey org-mode-map [(meta return)] 'org-meta-return)
   ;; Wrap lines in text modes (including Org mode)
   (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
   ;; Treat underscore as a symbol in Ruby so autocomplete includes whole identifiers
@@ -659,6 +659,7 @@ This function is called at the very end of Spacemacs initialization."
  '(eshell-buffer-shorthand nil t)
  '(eshell-history-size 10000 t)
  '(evil-ex-visual-char-range t)
+ '(evil-org-use-additional-insert t)
  '(evil-want-Y-yank-to-eol t)
  '(evil-want-fine-undo t)
  '(exec-path-from-shell-check-startup-files nil)
