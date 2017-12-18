@@ -41,7 +41,6 @@ values."
      chrome
      clojure
      emacs-lisp
-     ess
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      git
      ;; Github processing is too slow with the Console repo
