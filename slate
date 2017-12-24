@@ -1,9 +1,5 @@
 # config modalEscapeKey esc
 config defaultToCurrentScreen true
-# For hints
-config windowHintsShowIcons false
-config windowHintsIgnoreHiddenWindows false
-config windowHintsSpread true
 
 # Abstract positions
 alias full move screenOriginX;screenOriginY screenSizeX;screenSizeY
