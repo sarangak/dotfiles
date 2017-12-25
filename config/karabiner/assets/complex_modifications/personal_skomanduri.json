@@ -1,0 +1,120 @@
+{
+    "title": "Personal rules (@sarangak)",
+    "rules": [
+        {
+            "description": "Map F12 to Developer Tools in Chrome",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "f12"
+                    },
+                    "to": [
+                        {
+                            "key_code": "i",
+                            "modifiers": [
+                                "left_command",
+                                "left_option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.google\\.Chrome$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Command+Tab to Ctrl-F4 (with optional shift) for Hammerspoon",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "tab",
+                        "modifiers": {
+                            "mandatory": [
+                                "command"
+                            ],
+                            "optional": [
+                                "shift"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "f4",
+                            "modifiers": [
+                                "left_control"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "iTerm2 tab navigation",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "h",
+                        "modifiers": {
+                            "mandatory": [
+                                "control"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_arrow",
+                            "modifiers": [
+                                "left_command"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.googlecode\\.iterm2$"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "l",
+                        "modifiers": {
+                            "mandatory": [
+                                "control"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_arrow",
+                            "modifiers": [
+                                "left_command"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_if",
+                            "bundle_identifiers": [
+                                "^com\\.googlecode\\.iterm2$"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+
+    ]
+}
