@@ -31,17 +31,19 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     csv
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     ansible
      auto-completion
      ;; better-defaults
      chrome
      clojure
+     csv
      emacs-lisp
+     ess
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      git
      ;; Github processing is too slow with the Console repo
@@ -739,7 +741,6 @@ This function is called at the very end of Spacemacs initialization."
  '(persp-init-new-frame-behaviour-override (lambda (frame &optional new-frame-p) nil))
  '(pos-tip-background-color "#A6E22E")
  '(pos-tip-foreground-color "#272822")
- '(projectile-enable-caching t)
  '(scroll-margin 5)
  '(shell-file-name "bash")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
