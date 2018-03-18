@@ -543,14 +543,16 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>330 289 620 392 0 0 1280 777 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>269 296 1018 447 0 0 1280 777 </string>
+	<string>269 240 918 498 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1 19 640 758 0 0 1280 777 </string>
+	<string>0 348 1280 429 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>2 393 1277 384 0 0 1280 777 </string>
+	<string>51 131 570 452 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>2 393 1277 384 0 0 1280 777 </string>
+	<string>0 19 640 758 0 0 1280 777 </string>
 	<key>NeverWarnAboutShortLivedSessions_2778671C-D714-496F-950A-35150C457E40</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_E18684C7-F1AE-43DA-BB9E-4303A9E52865</key>
@@ -1262,7 +1264,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.37943786705386706</real>
+			<real>0.0</real>
 			<key>Triggers</key>
 			<array>
 				<dict>
@@ -2054,6 +2056,8 @@
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>513136090.54803598</real>
 	<key>OnlyWhenMoreTabs</key>
@@ -2117,6 +2121,8 @@
 	<integer>8</integer>
 	<key>RightOption</key>
 	<integer>3</integer>
+	<key>SUAutomaticallyUpdate</key>
+	<false/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
@@ -2126,9 +2132,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-05-20T01:42:26Z</date>
+	<date>2018-01-26T22:46:40Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
+	<key>SUSkippedVersion</key>
+	<string>3.1.5.beta.2</string>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
