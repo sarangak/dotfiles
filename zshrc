@@ -124,3 +124,6 @@ bindkey -M emacs '^N' history-substring-search-down
 # [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 PROMPT='${ret_status} %D %* %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
+
+# Run Nix daemon
+. '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'

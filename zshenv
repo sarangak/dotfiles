@@ -16,4 +16,3 @@ export VAGRANT_FORWARD_MYSQL_PORT=13306
 # These commands change env vars
 eval "$(rbenv init -)"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-. /Users/saranga/.nix-profile/etc/profile.d/nix.sh
