@@ -3,7 +3,7 @@
 -----------------------------------------------
 
 require "windows"
-require "keepass"
+require "slack"
 
 -----------------------------------------------
 -- Reload config on write

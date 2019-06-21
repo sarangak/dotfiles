@@ -2,6 +2,26 @@
     "title": "Personal rules (@sarangak)",
     "rules": [
         {
+            "description": "Map mouse button5 to open new tab in Chrome",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "pointing_button": "button5"
+                    },
+                    "to": [
+                        {
+                            "pointing_button": "button1",
+                            "modifiers": [
+                                "left_command",
+                                "left_shift"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "description": "Map F12 to Developer Tools in Chrome",
             "manipulators": [
                 {

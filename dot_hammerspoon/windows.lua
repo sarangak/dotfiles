@@ -20,9 +20,7 @@ hs.window.switcher.ui.showSelectedTitle = false
 hs.window.switcher.ui.showSelectedThumbnail = true
 hs.window.switcher.ui.showThumbnails = false
 
--- Override default behavior of avoiding 1Password miniwindows
-hs.window.filter.default:allowApp'1Password mini'
-hs.window.filter.default:allowApp'1Password Extension Helper'
+
 local switcher = hs.window.switcher.new()
 -- NOTE: I'm using Karabiner to remap cmd-tab to ctrl-F4 because Hammerspoon can't currently capture cmd-tab away from macOS
 hs.hotkey.bind({'ctrl'}, 'F4', function()
@@ -57,12 +55,14 @@ end)
 --]]
 
 -- Use Vimium hint order (prefer home row)
-hs.hints.hintChars = {'S', 'A', 'D', 'F', 'J', 'K', 'L', 'E', 'W', 'C', 'M', 'P', 'G', 'H'}
+-- hs.hints.hintChars = {'S', 'A', 'D', 'F', 'J', 'K', 'L', 'E', 'W', 'C', 'M', 'P', 'G', 'H'}
 hs.hints.showTitleThresh = 0
 
 
 hs.hotkey.bind({"ctrl"}, ';', function()
+    hs.hints.style = 'vimperator'
     hs.hints.windowHints()
+    hs.hints.style = 'default'
 end)
 
 -- Hint within current application
@@ -84,7 +84,7 @@ end)
 local focusKeys = {'ctrl', 'alt'}
 hs.fnutils.each({
     { key = "b", app = 'Google Chrome' },
-    { key = "h", app = 'HipChat' },
+    { key = "h", app = 'Slack' },
     { key = "m", app = "iTerm" },
     { key = "space", app = "Emacs" },
   },
@@ -92,6 +92,24 @@ hs.fnutils.each({
     hs.hotkey.bind(focusKeys, object.key, function()
       hs.application.launchOrFocus(object.app)
     end)
+end)
+
+
+------------------------------------------------------------
+-- Mute microphone in Meet
+------------------------------------------------------------
+--[[
+  Make ctrl + shift + m switch to Meet and mute the microphone
+--]]
+
+hs.hotkey.bind({'ctrl', 'shift'}, 'm', nil, function()
+    local oldWindow = hs.window.focusedWindow()
+    local meetWindow = hs.window.find('^Meet')
+
+    meetWindow:focus()
+    -- Meet's keyboard shortcut for muting the microphone is cmd-d
+    hs.eventtap.keyStroke({'cmd'}, "d")
+    oldWindow:focus()
 end)
 
 
@@ -132,7 +150,7 @@ end)
 local slateKeys = {'ctrl', 'alt', 'cmd'}
 
 local sizes = {2, 3, 3/2}
-local fullScreenSizes = {1, 6/5, 4/3}
+local fullScreenSizes = {1, 4/3, 2}
 
 local GRID = {w = 24, h = 24}
 hs.grid.setGrid(GRID.w .. 'x' .. GRID.h)
@@ -189,9 +207,8 @@ function nextFullScreenStep()
     for i=1,#fullScreenSizes do
       if cell.w == GRID.w / fullScreenSizes[i] and
         cell.h == GRID.h / fullScreenSizes[i] and
-        cell.x == (GRID.w - GRID.w / fullScreenSizes[i]) / 2 and
-        cell.y == (GRID.h - GRID.h / fullScreenSizes[i]) / 2 then
-          nextSize = fullScreenSizes[(i % #fullScreenSizes) + 1]
+        cell.x == (GRID.w - GRID.w / fullScreenSizes[i]) / 2 then
+        nextSize = fullScreenSizes[(i % #fullScreenSizes) + 1]
         break
       end
     end
@@ -199,7 +216,7 @@ function nextFullScreenStep()
     cell.w = GRID.w / nextSize
     cell.h = GRID.h / nextSize
     cell.x = (GRID.w - GRID.w / nextSize) / 2
-    cell.y = (GRID.h - GRID.h / nextSize) / 2
+    cell.y = 0
 
     hs.grid.set(win, cell, screen)
   end
@@ -309,5 +326,5 @@ end)
 
 hs.hotkey.bind(slateKeys, "1", function ()
   local win = hs.window.frontmostWindow()
-  win:moveOneScreenWast(false, true)
+  win:moveOneScreenWest(false, true)
 end)

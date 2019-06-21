@@ -1,8 +1,20 @@
 {
-  "settingsVersion": "1.62.4",
+  "settingsVersion": "1.64.6",
   "exclusionRules": [
     {
+      "pattern": "docs.google.com*",
+      "passKeys": ""
+    },
+    {
       "pattern": "https?://docs.google.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://mail.google.com/*",
+      "passKeys": ""
+    },
+    {
+      "pattern": "https?://trello.com/*",
       "passKeys": ""
     }
   ],

@@ -1,0 +1,27 @@
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export TERM=xterm-256color
+
+# export PATH="/Users/civisemployee/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin"
+export GOROOT=/Users/skomanduri/.gimme/versions/go1.11.4.darwin.amd64
+export GOPATH=/Users/skomanduri/golang
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# These commands change env vars
+eval "$(rbenv init -)"
+
+. /Users/skomanduri/.nix-profile/etc/profile.d/nix.sh
+
+# Inject GITHUB_TOKEN into env
+source /Users/skomanduri/.secrets
+
+# Activate virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+source /usr/local/bin/virtualenvwrapper.sh
+
+# pip should only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
