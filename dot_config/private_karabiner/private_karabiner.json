@@ -516,7 +516,10 @@
                                     "modifiers": {
                                         "mandatory": [
                                             "command"
-                                        ]
+                                        ],
+                                        "optional": [
+                                            "shift"
+                                        [
                                     }
                                 },
                                 "to": [

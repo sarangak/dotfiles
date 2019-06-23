@@ -7,6 +7,7 @@ export GOROOT=/Users/skomanduri/.gimme/versions/go1.11.4.darwin.amd64
 export GOPATH=/Users/skomanduri/golang
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # export MANPATH="/usr/local/man:$MANPATH"
+export PATH=$PATH:~/bin
 
 # These commands change env vars
 eval "$(rbenv init -)"

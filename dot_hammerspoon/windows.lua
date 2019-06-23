@@ -20,7 +20,9 @@ hs.window.switcher.ui.showSelectedTitle = false
 hs.window.switcher.ui.showSelectedThumbnail = true
 hs.window.switcher.ui.showThumbnails = false
 
-
+-- Override default behavior of avoiding 1Password miniwindows
+hs.window.filter.default:allowApp'1Password mini'
+hs.window.filter.default:allowApp'1Password Extension Helper'
 local switcher = hs.window.switcher.new()
 -- NOTE: I'm using Karabiner to remap cmd-tab to ctrl-F4 because Hammerspoon can't currently capture cmd-tab away from macOS
 hs.hotkey.bind({'ctrl'}, 'F4', function()
