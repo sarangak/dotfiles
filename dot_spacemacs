@@ -62,8 +62,9 @@ values."
      (org :variables
           org-enable-reveal-js-support t
           org-enable-github-support t)
-     parinfer
-     perl5
+     ;; Not available until next Spacemacs release
+     ;; parinfer
+     ;; perl5
      php
      (python :variables
              python-enable-yapf-format-on-save t
