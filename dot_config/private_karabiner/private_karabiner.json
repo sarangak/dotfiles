@@ -627,7 +627,6 @@
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.mozilla\\.firefox$",
-                                            "^com\\.google\\.Chrome$",
                                             "^com\\.apple\\.Safari$"
                                         ],
                                         "type": "frontmost_application_unless"
@@ -656,7 +655,6 @@
                                     {
                                         "bundle_identifiers": [
                                             "^org\\.mozilla\\.firefox$",
-                                            "^com\\.google\\.Chrome$",
                                             "^com\\.apple\\.Safari$"
                                         ],
                                         "type": "frontmost_application_if"
@@ -764,7 +762,6 @@
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.mozilla\\.firefox$",
-                                            "^com\\.google\\.Chrome$",
                                             "^com\\.apple\\.Safari$"
                                         ],
                                         "type": "frontmost_application_unless"
@@ -793,7 +790,6 @@
                                     {
                                         "bundle_identifiers": [
                                             "^org\\.mozilla\\.firefox$",
-                                            "^com\\.google\\.Chrome$",
                                             "^com\\.apple\\.Safari$"
                                         ],
                                         "type": "frontmost_application_if"
