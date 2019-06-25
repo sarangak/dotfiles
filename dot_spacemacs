@@ -395,13 +395,13 @@ layers configuration. You are free to put any user code."
 
   (spacemacs/set-leader-keys
     "SPC" 'evil-avy-goto-word-or-subword-1)
-  (evil-leader/set-key "of" 'make-frame)
-  (evil-leader/set-key "ob" 'spacemacs/new-empty-buffer)
-  (evil-leader/set-key "ot" 'private/projectile-eshell-in-root)
-  (evil-leader/set-key "oy" 'private/show-and-copy-buffer-filename-from-root)
-  (evil-leader/set-key "oc" 'private/open-local-platform-in-browser)
-  (evil-leader/set-key "ov" 'private/evil-select-pasted)
-  (evil-leader/set-key "o/" 'clone-indirect-buffer-other-window)
+  (spacemacs/set-leader-keys "of" 'make-frame)
+  (spacemacs/set-leader-keys "ob" 'spacemacs/new-empty-buffer)
+  (spacemacs/set-leader-keys "ot" 'private/projectile-eshell-in-root)
+  (spacemacs/set-leader-keys "oy" 'private/show-and-copy-buffer-filename-from-root)
+  (spacemacs/set-leader-keys "oc" 'private/open-local-platform-in-browser)
+  (spacemacs/set-leader-keys "ov" 'private/evil-select-pasted)
+  (spacemacs/set-leader-keys "o/" 'clone-indirect-buffer-other-window)
   (global-unset-key (kbd "s-w"))
   ;; Replicate visual line move commands from
   ;; https://github.com/syl20bnr/spacemacs/pull/6207/files#diff-0549c70ccafb60245919132b5952d64f
@@ -511,6 +511,9 @@ layers configuration. You are free to put any user code."
   ;; Fix for org-mode easy templates moved into their own package
   (when (version<= "9.2" (org-version))
     (require 'org-tempo))
+
+  ;; Fix for git blame micro state in Spacemacs 0.2x
+  (spacemacs/set-leader-keys "gb" 'magit-blame-addition)
 
   )
 
