@@ -81,6 +81,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+{{- if eq .category "work" }}
 # Aliases for working with local dev platform
 docker_compose_exec() {
     docker-compose exec console "$@"
@@ -102,14 +103,15 @@ alias rw="docker_compose_exec bash -c 'bundle exec rake jobs:work'"
 alias rc="docker_compose_exec bash -c 'bundle exec rails console'"
 alias dcmb="docker-compose exec mysql bash -c 'mysqldump console_development' > ~/dbbackups/console_dev_`gdate +%s%N`.sql"
 alias rdb="dcmb && docker_compose_exec bash -c 'bundle; npm install; bundle exec rake db:migrate'"
-alias bcf='bundle; bundle clean --force'
 alias gcod="git checkout -- db/schema.rb"
+{{- end }}
 
 # Utility aliases
 alias hgrep='history | egrep -i'
 alias beep="echo -e '\a'"
 alias ll="ls -lah"
 alias jd='[ 0 = 0 ] && echo -e '\''good\a'\'' || echo -e '\''bad\a'\'''
+alias bcf='bundle; bundle clean --force'
 
 # History substring search
 bindkey -M emacs '^P' history-substring-search-up
@@ -120,6 +122,7 @@ PROMPT='${ret_status} %D %* %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
 
 alias pyshell="nix-shell -p 'python37.withPackages(ps: with ps; [ virtualenvwrapper ])'"
 
+{{- if eq .category "work" }}
 # Kube Dashboard commands
 function kube_mini() {
   kubectl config use-context minikube
@@ -182,3 +185,4 @@ function kill_dashboard() {
     kill -9 $pid
   fi
 }
+{{- end }}
