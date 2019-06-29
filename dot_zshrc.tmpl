@@ -120,8 +120,6 @@ bindkey -M emacs '^N' history-substring-search-down
 # Create prompt with return status, timestamp, current dir, and git info
 PROMPT='${ret_status} %D %* %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
 
-alias pyshell="nix-shell -p 'python37.withPackages(ps: with ps; [ virtualenvwrapper ])'"
-
 {{- if eq .category "work" }}
 # Kube Dashboard commands
 function kube_mini() {
