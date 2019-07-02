@@ -496,7 +496,6 @@
                                             "^com\\.p5sys\\.jump\\.mac\\.viewer$",
                                             "^com\\.p5sys\\.jump\\.mac\\.viewer\\.web$",
                                             "^com\\.teamviewer\\.TeamViewer$",
-                                            "^org\\.gnu\\.Emacs$",
                                             "^com\\.2X\\.Client\\.Mac$",
                                             "^com\\.vmware\\.fusion$",
                                             "^com\\.vmware\\.horizon$",
