@@ -36,6 +36,7 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     ansible
      auto-completion
      ;; better-defaults
      clojure
@@ -371,7 +372,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
               (message file-name)
               (kill-new file-name)))
         (error "Buffer not visiting a file or no project root"))))
-  (defun align-colons (beg end)
+  (defun private/align-colons (beg end)
     "Align the given region for key: value content"
     (interactive)
     (align-regexp beg end ":\\(\\s-*\\)" 1 1 nil))
@@ -381,6 +382,15 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (evil-goto-mark ?\[)
     (evil-visual-char)
     (evil-goto-mark ?\]))
+  ;; The semantic package in Spacemacs wants to parse every buffer, which is no good!
+  (defun private/reformat-lisp ()
+    "Use srefactor to format lisp code"
+    (interactive)
+    (unless (package-installed-p 'srefactor)
+      (package-install 'srefactor)
+      (require 'srefactor)
+      (require 'srefactor-lisp))
+    (srefactor-lisp-format-buffer))
   (setq-default evil-snipe-use-vim-sneak-bindings t))
 
 
@@ -420,7 +430,6 @@ layers configuration. You are free to put any user code."
 
   ;; For atomic-chrome
   (atomic-chrome-start-server)
-  (setq atomic-chrome-buffer-open-style 'frame)
   (setq atomic-chrome-default-major-mode 'markdown-mode)
   (setq atomic-chrome-url-major-mode-alist
         '(
@@ -515,6 +524,8 @@ layers configuration. You are free to put any user code."
   ;; Fix for git blame micro state in Spacemacs 0.2x
   (spacemacs/set-leader-keys "gb" 'magit-blame-addition)
 
+  ;; Fix for Emacs url package issue with HTTPS urls
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
