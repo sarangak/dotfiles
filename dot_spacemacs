@@ -57,7 +57,9 @@ values."
      javascript
      latex
      lua
-     (markdown :variables markdown-live-preview-engine 'vmd)
+     (markdown :variables
+               markdown-list-indent-width 2
+               markdown-live-preview-engine 'vmd)
      nginx
      (org :variables
           org-enable-github-support t)
@@ -568,10 +570,10 @@ layers configuration. You are free to put any user code."
  '(grep-find-ignored-directories
    (quote
     ("SCCS" "RCS" "CVS" "MCVS" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "log" "vendor")))
- '(helm-ag-command-option "-S --ignore=vendor")
+ '(helm-ag-command-option "-S --ignore=vendor --ignore=reveal.js")
  '(helm-grep-ignored-directories
    (quote
-    ("SCCS" "RCS" "CVS" "MCVS" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".gvfs" "log" "vendor")))
+    ("SCCS" "RCS" "CVS" "MCVS" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".gvfs" "log" "vendor" "reveal.js")))
  '(hippie-expand-try-functions-list
    (quote
     (try-expand-whole-kill yas-hippie-try-expand try-expand-dabbrev try-expand-dabbrev-all-buffers try-expand-dabbrev-from-kill try-complete-file-name-partially try-complete-file-name try-expand-all-abbrevs try-expand-list try-expand-line try-complete-lisp-symbol-partially try-complete-lisp-symbol)))
