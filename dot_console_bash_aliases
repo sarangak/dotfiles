@@ -55,7 +55,7 @@ if ! [ -x "$(command -v rg)" ]; then
     popd
 fi
 
-# Install htop and wget
+# Install some useful utilities
 function apt-install {
     if ! [ -x "$(command -v $1)" ]; then
         echo "$1 is not installed.  Installing..." >&2
@@ -64,6 +64,7 @@ function apt-install {
 }
 apt-install htop
 apt-install wget
+apt-install vim
 
 # Set up ssh agent
 function ssh-up {
