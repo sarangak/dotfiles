@@ -89,7 +89,7 @@ docker_compose_exec() {
 alias dc="docker-compose"
 alias dcu="docker-compose up -d"
 alias dch="docker-compose stop"
-alias dcrmall="docker-compose rm console; docker image rm console_console"
+alias dcrmall="docker-compose rm console; docker-compose rm delayed_job; docker image rm civis_console_dev; docker image prune"
 alias dcs="docker_compose_exec /bin/bash"
 alias dcl="docker-compose logs"
 alias dclf="dcl -f"
