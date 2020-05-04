@@ -4,7 +4,7 @@
 local slackHotkeys = {
   hs.hotkey.new({'ctrl'}, '/', nil, function()
       -- Search
-      hs.eventtap.keyStroke({'cmd'}, 'k')
+      hs.eventtap.keyStroke({'cmd'}, 't')
   end),
   hs.hotkey.new({'ctrl', 'shift'}, '/', nil, function()
       -- Start a DM with multiple people
