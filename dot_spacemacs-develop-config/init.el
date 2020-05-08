@@ -69,7 +69,7 @@ This function should only modify configuration layer settings."
      (org :variables
           org-enable-github-support t)
      ;; Not available until next Spacemacs release
-     ;; parinfer
+     parinfer
      ;; perl5
      php
      (python :variables
