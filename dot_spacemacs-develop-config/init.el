@@ -68,7 +68,6 @@ This function should only modify configuration layer settings."
      nginx
      (org :variables
           org-enable-github-support t)
-     ;; Not available until next Spacemacs release
      parinfer
      ;; perl5
      php
@@ -593,7 +592,7 @@ layers configuration. You are free to put any user code."
   (setq atomic-chrome-default-major-mode 'markdown-mode)
   (setq atomic-chrome-url-major-mode-alist
         '(
-	  ;; ("mail\\.google\\.com" . ham-mode)
+          ;; ("mail\\.google\\.com" . ham-mode)
           ("github\\.com" . gfm-mode)))
 
   ;; For haml-lint
@@ -681,9 +680,6 @@ layers configuration. You are free to put any user code."
   (when (version<= "9.2" (org-version))
     (require 'org-tempo))
 
-  ;; Fix for git blame micro state in Spacemacs 0.2x
-  (spacemacs/set-leader-keys "gb" 'magit-blame-addition)
-
   ;; Fix for Emacs url package issue with HTTPS urls
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
@@ -693,8 +689,8 @@ layers configuration. You are free to put any user code."
         deft-auto-save-interval 60.0
         deft-markdown-mode-title-level 1
         deft-use-filename-as-title nil
-        deft-use-filter-string-for-filename nil)
-  )
+        deft-use-filter-string-for-filename nil))
+  
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
