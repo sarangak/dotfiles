@@ -17,6 +17,8 @@ function jd {
     if [ $? -eq 0]; then echo -e "GOOD\n\a\n"; else echo -e "BAD\n\a\n"; fi
 }
 alias appw="rg --files app/ lib/ -g '*.rb' | entr"
+alias serv="DISABLE_SPRING=1 bundle exec rails server -b 0.0.0.0"
+alias rc="bundle exec rails console"
 
 
 # Get sudo

@@ -92,7 +92,7 @@ alias dch="docker-compose stop"
 alias dcrmall="docker-compose rm console; docker-compose rm delayed_job; docker image rm civis_console_dev; docker system prune -a --volumes"
 alias dcs="docker_compose_exec /bin/bash"
 alias dcl="docker-compose logs"
-alias dclf="dcl -f"
+alias dclf="dcl --tail=10 -f"
 dcsudo() {
     docker exec -u root -it $(docker ps -aqf "name=console_console") /bin/bash
 }
