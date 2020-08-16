@@ -42,7 +42,6 @@ This function should only modify configuration layer settings."
      ;; better-defaults
      clojure
      csv
-     deft
      emacs-lisp
      ess
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
@@ -51,10 +50,13 @@ This function should only modify configuration layer settings."
      ;; github
      (go :variables
          go-tab-width 2
-         go-use-golangci-lint t
-         )
-     helm
+         go-use-golangci-lint t)
+
+     ;; Unable to get helm package working with Emacs 27.1 as of 8-16-2020
+     ;; Switched to ivy
+     ;; helm
      html
+     ivy
      (javascript :variables
                  javascript-backend 'lsp
                  javascript-fmt-tool 'prettier
@@ -94,8 +96,8 @@ This function should only modify configuration layer settings."
      ;; (version-control :variables
      ;;                  version-control-diff-tool 'diff-hl
      ;;                  version-control-diff-side 'left)
-     yaml
-     )
+     yaml)
+   
 
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -682,15 +684,7 @@ layers configuration. You are free to put any user code."
 
   ;; Fix for Emacs url package issue with HTTPS urls
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-
-  ;; Deft settings
-  (setq deft-extensions '("md" "org" "txt")
-        deft-new-file-format "%FT%T%z"
-        deft-auto-save-interval 60.0
-        deft-markdown-mode-title-level 1
-        deft-use-filename-as-title nil
-        deft-use-filter-string-for-filename nil))
-  
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -830,6 +824,7 @@ This function is called at the very end of Spacemacs initialization."
  '(hl-fg-colors
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
+ '(js-indent-level 2)
  '(magit-diff-use-overlays nil)
  '(markdown-command "pandoc")
  '(multi-term-dedicated-close-back-to-open-buffer-p t)
