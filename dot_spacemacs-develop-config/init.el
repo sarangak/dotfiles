@@ -581,6 +581,8 @@ layers configuration. You are free to put any user code."
   (spacemacs/set-leader-keys "ov" 'private/evil-select-pasted)
   (spacemacs/set-leader-keys "o/" 'clone-indirect-buffer-other-window)
   (global-unset-key (kbd "s-w"))
+  ;; Use g m to goto mark, rather than backtick which I find hard to remember to use
+  (define-key evil-motion-state-map "gm" 'evil-goto-mark)
   ;; Replicate visual line move commands from
   ;; https://github.com/syl20bnr/spacemacs/pull/6207/files#diff-0549c70ccafb60245919132b5952d64f
   ;; using org-mode keys
@@ -690,8 +692,8 @@ layers configuration. You are free to put any user code."
     (require 'org-tempo))
 
   ;; Fix for Emacs url package issue with HTTPS urls
-  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-  )
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+  
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
