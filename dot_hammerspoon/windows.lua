@@ -98,19 +98,29 @@ end)
 
 
 ------------------------------------------------------------
--- Mute microphone in Meet
+-- Mute microphone in Meet/Zoom
 ------------------------------------------------------------
 --[[
-  Make ctrl + shift + m switch to Meet and mute the microphone
+  Make ctrl + shift + m switch to Meet/Zoom and mute the microphone
 --]]
 
 hs.hotkey.bind({'ctrl', 'shift'}, 'm', nil, function()
     local oldWindow = hs.window.focusedWindow()
     local meetWindow = hs.window.find('^Meet')
 
-    meetWindow:focus()
-    -- Meet's keyboard shortcut for muting the microphone is cmd-d
-    hs.eventtap.keyStroke({'cmd'}, "d")
+    if meetWindow then
+      meetWindow:focus()
+      -- Meet's keyboard shortcut for muting the microphone is cmd-d
+      hs.eventtap.keyStroke({'cmd'}, "d")
+    end
+
+    local zoomWindow = hs.window.find('^Zoom Meeting')
+
+    if zoomWindow then
+      zoomWindow:focus()
+      -- Zoom's keyboard shortcut for muting the microphone is shift-cmd-a
+      hs.eventtap.keyStroke({'shift', 'cmd'}, "a")
+    end
     oldWindow:focus()
 end)
 
