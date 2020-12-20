@@ -108,7 +108,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(adaptive-wrap company-tern)
+   dotspacemacs-excluded-packages '(adaptive-wrap company-tern evil-escape)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and deletes any unused
@@ -582,8 +582,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (setq-default
-   evil-escape-delay 0.2
-   evil-escape-unordered-key-sequence t
    multi-term-program "/usr/local/bin/zsh")
 
   (spacemacs/set-leader-keys
@@ -701,8 +699,14 @@ layers configuration. You are free to put any user code."
     (require 'org-tempo))
 
   ;; Fix for Emacs url package issue with HTTPS urls
-  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
-  
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
+  ;; Enable flycheck in text modes
+  (spacemacs/enable-flycheck 'text-mode)
+  (spacemacs/enable-flycheck 'markdown-mode)
+  (spacemacs/enable-flycheck 'gfm-mode)
+  (spacemacs/enable-flycheck 'org-mode)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
