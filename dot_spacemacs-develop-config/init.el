@@ -749,6 +749,7 @@ layers configuration. You are free to put any user code."
  '(org-blank-before-new-entry (quote ((heading) (plain-list-item))))
  '(org-confirm-babel-evaluate nil)
  '(org-export-headline-levels 1)
+ '(org-src-preserve-indentation t)
  '(org-startup-folded nil)
  '(org-startup-indented t)
  '(org-use-sub-superscripts (quote {}))
