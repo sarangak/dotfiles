@@ -92,7 +92,16 @@ hs.fnutils.each({
   },
   function(object)
     hs.hotkey.bind(focusKeys, object.key, function()
-      hs.application.launchOrFocus(object.app)
+                     local hsapp = hs.application.find(object.app)
+
+                     if hsapp and hsapp:mainWindow() then
+                       hsapp:mainWindow():focus()
+                       -- Alternative way of doing the same thing?
+                       -- hsapp:setFrontmost()
+                     else
+                       -- launchOrFocus will bring all windows of the application forward, which is not what I want
+                       hs.application.launchOrFocus(object.app)
+                     end
     end)
 end)
 
