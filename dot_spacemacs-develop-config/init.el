@@ -39,7 +39,11 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ;; ansible  ;; Must disable ansible for now https://github.com/syl20bnr/spacemacs/issues/8027
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-return-key-behavior nil
+                      auto-completion-tab-key-behavior 'complete
+                      auto-completion-idle-delay 0.0
+                      auto-completion-minimum-prefix-length 1)
      ;; better-defaults
      clojure
      csv
@@ -85,6 +89,9 @@ This function should only modify configuration layer settings."
             shell-default-position 'bottom
             shell-enable-smart-eshell t
             shell-default-shell 'multi-term)
+     (spacemacs-layouts :variables
+                        spacemacs-layouts-restrict-spc-tab t
+                        persp-autokill-buffer-on-remove 'kill-weak)
      spell-checking
      sql
      syntax-checking
@@ -257,7 +264,8 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   ;; dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme 'vanilla
 
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -642,9 +650,6 @@ layers configuration. You are free to put any user code."
                                            try-expand-all-abbrevs
                                            try-complete-lisp-symbol-partially
                                            try-complete-lisp-symbol))
-  ;; Enable autocompletion everywhere?
-  ;; (global-company-mode)
-  (setq company-idle-delay 0.1)
   ;; Add current point to jump list when using a count jump which is often used with relative numbering.
   (defun my-evil-set-jump (&rest args)
     (if (and (car args) (< 1 (car args))) (evil-set-jump)))
