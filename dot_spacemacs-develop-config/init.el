@@ -40,7 +40,6 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      ;; ansible  ;; Must disable ansible for now https://github.com/syl20bnr/spacemacs/issues/8027
      (auto-completion :variables
-                      auto-completion-return-key-behavior nil
                       auto-completion-tab-key-behavior 'complete
                       auto-completion-idle-delay 0.0
                       auto-completion-minimum-prefix-length 1)
@@ -58,6 +57,7 @@ This function should only modify configuration layer settings."
          go-format-before-save t
          gofmt-command "goimports"
          go-use-golangci-lint t)
+     haskell
      helm
      html
      ;; ivy
@@ -710,6 +710,9 @@ layers configuration. You are free to put any user code."
   (spacemacs/enable-flycheck 'markdown-mode)
   (spacemacs/enable-flycheck 'gfm-mode)
   (spacemacs/enable-flycheck 'org-mode)
+
+  ;; Disable parinfer mode when editing this file
+  (remove-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
