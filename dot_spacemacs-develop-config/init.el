@@ -557,6 +557,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (let ((file-name (s-trim (replace-regexp-in-string "[^[:alnum:]-_ ]+" " " (buffer-name)))))
       (progn
         (message file-name)
+        (rename-buffer file-name)
         (kill-new file-name))))
   (defun private/align-colons (beg end)
     "Align the given region for key: value content"
