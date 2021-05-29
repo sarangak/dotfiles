@@ -36,14 +36,20 @@ local slackHotkeys = {
   end)
 }
 
+-- Use non-anonymous function to improve performance
+local function enableSlackKeys()
+  -- Use this instead of pairs syntax to improve performance
+  for k = 1, #slackHotkeys do
+    slackHotkeys[k]:enable()
+  end
+end
+
+local function disableSlackKeys()
+  for k = 1, #slackHotkeys do
+    slackHotkeys[k]:disable()
+  end
+end
+
 hs.window.filter.new('Slack')
-  :subscribe(hs.window.filter.windowFocused,function()
-               for _, k in pairs(slackHotkeys) do
-                 k:enable()
-               end
-            end)
-  :subscribe(hs.window.filter.windowUnfocused,function()
-               for _, k in pairs(slackHotkeys) do
-                 k:disable()
-               end
-            end)
+  :subscribe(hs.window.filter.windowFocused, enableSlackKeys)
+  :subscribe(hs.window.filter.windowUnfocused, disableSlackKeys)

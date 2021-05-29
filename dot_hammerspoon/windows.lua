@@ -23,29 +23,35 @@ hs.window.switcher.ui.showThumbnails = false
 -- Override default behavior of avoiding 1Password miniwindows
 hs.window.filter.default:allowApp'1Password mini'
 hs.window.filter.default:allowApp'1Password Extension Helper'
+
 local switcher = hs.window.switcher.new()
--- NOTE: I'm using Karabiner to remap cmd-tab to ctrl-F4 because Hammerspoon can't currently capture cmd-tab away from macOS
-hs.hotkey.bind({'ctrl'}, 'F4', function()
-                 switcher:next()
-end)
-hs.hotkey.bind({'ctrl', 'shift'}, 'F4', function()
-                 switcher:previous()
-end)
+local function nextWindow()
+  switcher:next()
+end
+local function prevWindow()
+  switcher:previous()
+end
+hs.hotkey.bind('alt', 'tab', nextWindow)
+hs.hotkey.bind({'alt', 'shift'}, 'tab', prevWindow)
 
 local mySwitchers = {}
-function currentApplicationSwitcher()
-  local currentApplication = hs.window.focusedWindow():application():name()
-  if mySwitchers[currentApplication] == nil then
-    mySwitchers[currentApplication] = hs.window.switcher.new(currentApplication)
+local function currentAppSwitcher()
+  local currentAppName = hs.window.focusedWindow():application():name()
+  if mySwitchers[currentAppName] == nil then
+    mySwitchers[currentAppName] = hs.window.switcher.new(currentAppName)
   end
-  return mySwitchers[currentApplication]
+  return mySwitchers[currentAppName]
 end
-hs.hotkey.bind('alt', 'tab', function()
-                 currentApplicationSwitcher():next()
-end)
-hs.hotkey.bind({'alt', 'shift'}, 'tab', function()
-                 currentApplicationSwitcher():previous()
-end)
+local function nextAppWindow()
+  currentAppSwitcher():next()
+end
+local function prevAppWindow()
+  currentAppSwitcher():previous()
+end
+-- NOTE: I'm using Karabiner to remap cmd-tab to ctrl-F4 because Hammerspoon can't currently capture cmd-tab away from macOS
+hs.hotkey.bind({'ctrl'}, 'F4', nextAppWindow)
+hs.hotkey.bind({'ctrl', 'shift'}, 'F4', prevAppWindow)
+
 
 
 ------------------------------------------------------------
@@ -56,25 +62,20 @@ end)
   the letter for the window you want
 --]]
 
--- Use Vimium hint order (prefer home row)
--- hs.hints.hintChars = {'S', 'A', 'D', 'F', 'J', 'K', 'L', 'E', 'W', 'C', 'M', 'P', 'G', 'H'}
-hs.hints.showTitleThresh = 0
-
-
-hs.hotkey.bind({"ctrl"}, ';', function()
-    hs.hints.style = 'vimperator'
-    hs.hints.windowHints()
-    hs.hints.style = 'default'
-end)
-
--- Hint within current application
-hs.hotkey.bind({"ctrl", "alt"}, ';', function()
-    hs.hints.windowHints(hs.window.focusedWindow():application():allWindows())
-end)
+expose = hs.expose.new(nil,{includeNonVisible=false})
+expose_app = hs.expose.new(nil,{onlyActiveApplication=true})
+local function showExpose()
+  expose:toggleShow()
+end
+local function showAppExpose()
+  expose_app:toggleShow()
+end
+hs.hotkey.bind({"ctrl"}, ';', showExpose)
+hs.hotkey.bind({"ctrl", "alt"}, ';', showAppExpose)
 
 
 ------------------------------------------------------------
--- Quickswitcher
+-- Quickswitch
 ------------------------------------------------------------
 --[[
   Use hotkeys to switch between applications
@@ -83,7 +84,6 @@ end)
   it.
 --]]
 
-local focusKeys = {'ctrl', 'alt'}
 hs.fnutils.each({
     { key = "b", app = 'Google Chrome' },
     { key = "h", app = 'Slack' },
@@ -91,19 +91,43 @@ hs.fnutils.each({
     { key = "space", app = "Emacs" },
   },
   function(object)
-    hs.hotkey.bind(focusKeys, object.key, function()
-                     local hsapp = hs.application.find(object.app)
+    local appKey = object.key
+    local appName = object.app
+    local function switchApp()
+      local hsapp = hs.application.find(appName)
 
-                     if hsapp and hsapp:mainWindow() then
-                       hsapp:mainWindow():focus()
-                       -- Alternative way of doing the same thing?
-                       -- hsapp:setFrontmost()
-                     else
-                       -- launchOrFocus will bring all windows of the application forward, which is not what I want
-                       hs.application.launchOrFocus(object.app)
-                     end
-    end)
+      if hsapp and hsapp:mainWindow() then
+        hsapp:mainWindow():focus()
+        -- Alternative way of doing the same thing?
+        -- hsapp:setFrontmost()
+      else
+        -- launchOrFocus will bring all windows of the application forward, which is not what I want
+        hs.application.launchOrFocus(appName)
+      end
+    end
+
+    hs.hotkey.bind('ctrl-alt', appKey, switchApp)
 end)
+
+-- Vimium tab selector
+--[[
+  Make ctrl-alt-o switch to the Vimium tab selector
+
+  Assumes that your Chrome windows have the "New Tab" page
+  open as the first tab and the focus is not in the omnibar.
+
+  ctrl-alt-t was my first choice for a keybinding but it
+  is swallowed by Chrome (doesn't make it to Hammerspoon if
+  Chrome is focused)
+--]]
+
+local function vimiumTabSwitch()
+  hs.application.launchOrFocus('Google Chrome')
+  hs.eventtap.keyStroke({'cmd'}, "1")
+  hs.eventtap.keyStroke({'shift'}, 't')
+end
+hs.hotkey.bind('ctrl-alt', "o", nil, vimiumTabSwitch)
+
 
 
 ------------------------------------------------------------
@@ -113,46 +137,28 @@ end)
   Make ctrl + shift + m switch to Meet/Zoom and mute the microphone
 --]]
 
-hs.hotkey.bind({'ctrl', 'shift'}, 'm', nil, function()
-    local oldWindow = hs.window.focusedWindow()
-    local meetWindow = hs.window.find('^Meet')
+local function toggleMute()
+  local oldWindow = hs.window.focusedWindow()
 
-    if meetWindow then
-      meetWindow:focus()
-      -- Meet's keyboard shortcut for muting the microphone is cmd-d
-      hs.eventtap.keyStroke({'cmd'}, "d")
-    end
-
-    local zoomWindow = hs.window.find('^Zoom Meeting')
-
-    if zoomWindow then
-      zoomWindow:focus()
-      -- Zoom's keyboard shortcut for muting the microphone is shift-cmd-a
-      hs.eventtap.keyStroke({'shift', 'cmd'}, "a")
-    end
+  local meetWindow = hs.window.find('^Meet')
+  if meetWindow then
+    meetWindow:focus()
+    -- Meet's keyboard shortcut for muting the microphone is cmd-d
+    hs.eventtap.keyStroke({'cmd'}, "d")
     oldWindow:focus()
-end)
+    return
+  end
 
-
-------------------------------------------------------------
--- Vimium tab selector
-------------------------------------------------------------
---[[
-  Make focusKeys + o switch to the Vimium tab selector
-
-  Assumes that your Chrome windows have the "New Tab" page
-  open as the first tab and the focus is not in the omnibar.
-
-  focusKeys + t was my first choice for a keybinding but it
-  is swallowed by Chrome (doesn't make it to Hammerspoon if
-  Chrome is focused)
---]]
-
-hs.hotkey.bind(focusKeys, "o", nil, function()
-                 hs.application.launchOrFocus('Google Chrome')
-                 hs.eventtap.keyStroke({'cmd'}, "1")
-                 hs.eventtap.keyStroke({'shift'}, 't')
-end)
+  local zoomWindow = hs.window.find('^Zoom Meeting')
+  if zoomWindow then
+    zoomWindow:focus()
+    -- Zoom's keyboard shortcut for muting the microphone is shift-cmd-a
+    hs.eventtap.keyStroke({'shift', 'cmd'}, "a")
+    oldWindow:focus()
+    return
+  end
+end
+hs.hotkey.bind({'ctrl', 'shift'}, 'm', nil, toggleMute)
 
 
 ------------------------------------------------------------
@@ -160,166 +166,94 @@ end)
 ------------------------------------------------------------
 --[[
   Emulate Slate resize/positioning macros
-
-  Based on https://github.com/pstadler/dotfiles/blob/master/hammerspoon/position.lua
-
-  Minor modifications:
-  - Changed full screen sizes to be a little larger
-  - Vim keys instead of arrow keys
 --]]
 
 local slateKeys = {'ctrl', 'alt', 'cmd'}
 
-local sizes = {2, 3, 3/2}
-local fullScreenSizes = {1, 4/3, 2}
+local sizes = {0.5, 0.333333, 0.666667}
+local fullScreenSizes = {1, 0.75, 0.5}
 
 local GRID = {w = 24, h = 24}
 hs.grid.setGrid(GRID.w .. 'x' .. GRID.h)
 hs.grid.MARGINX = 0
 hs.grid.MARGINY = 0
 
-local pressed = {
-  up = false,
-  down = false,
-  left = false,
-  right = false
-}
-
-function nextStep(dim, offs, cb)
-  if hs.window.focusedWindow() then
-    local axis = dim == 'w' and 'x' or 'y'
-    local oppDim = dim == 'w' and 'h' or 'w'
-    local oppAxis = dim == 'w' and 'y' or 'x'
-    local win = hs.window.frontmostWindow()
-    local id = win:id()
-    local screen = win:screen()
-
-    cell = hs.grid.get(win, screen)
-
-    local nextSize = sizes[1]
-    for i=1,#sizes do
-      if cell[dim] == GRID[dim] / sizes[i] and
-        (cell[axis] + (offs and cell[dim] or 0)) == (offs and GRID[dim] or 0)
-        then
-          nextSize = sizes[(i % #sizes) + 1]
-        break
-      end
-    end
-
-    cb(cell, nextSize)
-    if cell[oppAxis] ~= 0 and cell[oppAxis] + cell[oppDim] ~= GRID[oppDim] then
-      cell[oppDim] = GRID[oppDim]
-      cell[oppAxis] = 0
-    end
-
-    hs.grid.set(win, cell, screen)
-  end
+local function round(x)
+  return math.floor(x + 0.5) -- doesn't work with negative numbers but I don't need them
 end
 
-function nextFullScreenStep()
-  if hs.window.focusedWindow() then
-    local win = hs.window.frontmostWindow()
-    local id = win:id()
-    local screen = win:screen()
-
-    cell = hs.grid.get(win, screen)
-
-    local nextSize = fullScreenSizes[1]
-    for i=1,#fullScreenSizes do
-      if cell.w == GRID.w / fullScreenSizes[i] and
-        cell.h == GRID.h / fullScreenSizes[i] and
-        cell.x == (GRID.w - GRID.w / fullScreenSizes[i]) / 2 then
-        nextSize = fullScreenSizes[(i % #fullScreenSizes) + 1]
-        break
-      end
-    end
-
-    cell.w = GRID.w / nextSize
-    cell.h = GRID.h / nextSize
-    cell.x = (GRID.w - GRID.w / nextSize) / 2
-    cell.y = 0
-
-    hs.grid.set(win, cell, screen)
+local function nextStep(sizeDim, posDim, padPos)
+  if not hs.window.focusedWindow() then
+    return
   end
+
+  local win = hs.window.frontmostWindow()
+  local cell = hs.grid.get(win)
+
+  local nextSize = sizes[1]
+  for i=1,#sizes do
+    local sizeFactor = sizes[i]
+    if cell[sizeDim] == round(GRID[sizeDim] * sizeFactor) and
+      ((padPos and cell[posDim] == round(GRID[sizeDim] - GRID[sizeDim] * sizeFactor)) or
+        (not padPos and cell[posDim] == 0))
+    then
+      nextSize = sizes[(i % #sizes) + 1]
+      break
+    end
+  end
+
+  cell[sizeDim] = round(GRID[sizeDim] * nextSize)
+  if padPos then
+    cell[posDim] = GRID[sizeDim] - cell[sizeDim]
+  else
+    cell[posDim] = 0
+  end
+  hs.grid.set(win, cell)
+end
+local function nextStepUp()
+  nextStep('h', 'y', false)
+end
+local function nextStepDown()
+  nextStep('h', 'y', true)
+end
+local function nextStepLeft()
+  nextStep('w', 'x', false)
+end
+local function nextStepRight()
+  nextStep('w', 'x', true)
 end
 
-function fullDimension(dim)
-  if hs.window.focusedWindow() then
-    local win = hs.window.frontmostWindow()
-    local id = win:id()
-    local screen = win:screen()
-    cell = hs.grid.get(win, screen)
-
-    if (dim == 'x') then
-      cell = '0,0 ' .. GRID.w .. 'x' .. GRID.h
-    else
-      cell[dim] = GRID[dim]
-      cell[dim == 'w' and 'x' or 'y'] = 0
-    end
-
-    hs.grid.set(win, cell, screen)
+local function nextFullScreenStep()
+  if not hs.window.focusedWindow() then
+    return
   end
+
+  local win = hs.window.frontmostWindow()
+  local cell = hs.grid.get(win)
+
+  local nextSize = fullScreenSizes[1] -- default to fullscreen if the window doesn't match the grid
+  for i=1,#fullScreenSizes do
+    local sizeFactor = fullScreenSizes[i]
+    if cell.w == round(GRID.w * sizeFactor) and
+      cell.h == round(GRID.h * sizeFactor) and
+      cell.x == round((GRID.w - GRID.w * sizeFactor) / 2) then
+      nextSize = fullScreenSizes[(i % #fullScreenSizes) + 1]
+      break
+    end
+  end
+
+  cell.w = round(GRID.w * nextSize)
+  cell.h = round(GRID.h * nextSize)
+  cell.x = round((GRID.w - GRID.w * nextSize) / 2)
+  cell.y = 0
+  hs.grid.set(win, cell)
 end
 
-hs.hotkey.bind(slateKeys, "j", function ()
-  pressed.down = true
-  if pressed.up then
-    fullDimension('h')
-  else
-    nextStep('h', true, function (cell, nextSize)
-      cell.y = GRID.h - GRID.h / nextSize
-      cell.h = GRID.h / nextSize
-    end)
-  end
-end, function ()
-  pressed.down = false
-end)
-
-hs.hotkey.bind(slateKeys, "l", function ()
-  pressed.right = true
-  if pressed.left then
-    fullDimension('w')
-  else
-    nextStep('w', true, function (cell, nextSize)
-      cell.x = GRID.w - GRID.w / nextSize
-      cell.w = GRID.w / nextSize
-    end)
-  end
-end, function ()
-  pressed.right = false
-end)
-
-hs.hotkey.bind(slateKeys, "h", function ()
-  pressed.left = true
-  if pressed.right then
-    fullDimension('w')
-  else
-    nextStep('w', false, function (cell, nextSize)
-      cell.x = 0
-      cell.w = GRID.w / nextSize
-    end)
-  end
-end, function ()
-  pressed.left = false
-end)
-
-hs.hotkey.bind(slateKeys, "k", function ()
-  pressed.up = true
-  if pressed.down then
-      fullDimension('h')
-  else
-    nextStep('h', false, function (cell, nextSize)
-      cell.y = 0
-      cell.h = GRID.h / nextSize
-    end)
-  end
-end, function ()
-  pressed.up = false
-end)
-
-hs.hotkey.bind(slateKeys, "i", function ()
-  nextFullScreenStep()
-end)
+hs.hotkey.bind(slateKeys, "k", nextStepUp)
+hs.hotkey.bind(slateKeys, "j", nextStepDown)
+hs.hotkey.bind(slateKeys, "h", nextStepLeft)
+hs.hotkey.bind(slateKeys, "l", nextStepRight)
+hs.hotkey.bind(slateKeys, "i", nextFullScreenStep)
 
 -- For debugging
 -- hs.hotkey.bind(slateKeys, "i", function ()
@@ -336,16 +270,15 @@ end)
 ------------------------------------------------------------
 --[[
   Hotkeys assume two screens: 0 and 1
-
-  Under the hood, uses moveOneScreenEast and moveOneScreenWest
 --]]
 
-hs.hotkey.bind(slateKeys, "2", function ()
+local function moveWindowEast()
   local win = hs.window.frontmostWindow()
   win:moveOneScreenEast(false, true)
-end)
-
-hs.hotkey.bind(slateKeys, "1", function ()
+end
+local function moveWindowWest()
   local win = hs.window.frontmostWindow()
   win:moveOneScreenWest(false, true)
-end)
+end
+hs.hotkey.bind(slateKeys, "2", moveWindowEast)
+hs.hotkey.bind(slateKeys, "1", moveWindowWest)
