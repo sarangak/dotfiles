@@ -6,6 +6,13 @@ require "windows"
 require "slack"
 
 -----------------------------------------------
+-- Reload with key binding
+-----------------------------------------------
+
+-- I can't seem to find a better solution than to periodically reload my config ;(
+hs.hotkey.bind('ctrl-alt', "'", hs.reload)
+
+-----------------------------------------------
 -- Reload config on write
 -----------------------------------------------
 
