@@ -712,6 +712,10 @@ layers configuration. You are free to put any user code."
   (spacemacs/enable-flycheck 'gfm-mode)
   (spacemacs/enable-flycheck 'org-mode)
 
+  ;; Make flycheck less obtrusive
+  (setq flycheck-check-syntax-automatically '(save idle-change mode-enabled))
+  (setq flycheck-idle-change-delay 2)
+
   ;; Disable parinfer mode when editing this file
   (remove-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
   )
