@@ -2,6 +2,7 @@
 -- Set up
 -----------------------------------------------
 
+require "hs.ipc"
 require "windows"
 require "slack"
 
