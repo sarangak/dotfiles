@@ -141,68 +141,7 @@ bindkey -M emacs '^N' history-substring-search-down
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 {{- if eq .category "work" }}
-# Kube Dashboard commands
-function kube_mini() {
-  kubectl config use-context minikube
-}
+export KUBECONFIG=$HOME/civis-kubectl-configs/config
 
-function kube_staging() {
-  source ~/assume_role.sh 943976103640 skomanduri 631627684437 BocceDeployer
-  kubectl config use-context cuddly-cuttlefish.services-staging.civis.io
-}
-
-
-function kube_prod() {
-  source ~/assume_role.sh 943976103640 skomanduri 494246847414 BocceDeployer
-  kubectl config use-context spurious-spoon.services.civis.io
-}
-
-# Display the current context and namespace
-function kcon() {
-  kubectl config view -o json | jq --arg current_context "$(kubectl config current-context)" '.contexts | .[] | if .name == ($current_context) then {current_context: .name, current_namespace: .context.namespace} else empty end'
-}
-
-# If given an arg, set the current namespace to that. Otherwise, display the current namespace
-function kns() {
-  if [ $# -eq 0 ]; then
-    kubectl config view -o json | jq --arg current_context "$(kubectl config current-context)" '.contexts | .[] | if .name == ($current_context) then .context.namespace else empty end'
-  else
-    kubectl config set-context $(kubectl config current-context) --namespace=$1
-  fi
-}
-
-# start up the K8s Dashboard for staging or production
-# USAGE: kube_dashboard [staging|production]
-function kube_dashboard() {
-  if [ -z "$1" ]; then
-    echo "One argument must be passed in and it must be either staging or production"
-    return 1
-  fi
-
-  pushd ~/iam-role-injector
-  source awscli/bin/activate
-
-  if [[ $1 == "staging" ]]; then
-    kube_staging
-  elif [[ $1 == "production" ]]; then
-    kube_prod
-  fi
-
-  kubectl get secrets developer-read-token -n kube-system -o json | jq -r .data.token | base64 --decode | pbcopy
-  kill_dashboard
-  kubectl proxy &
-  open http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-  echo "Your auth token is in your clipboard. Just paste it into the prompt"
-  popd
-}
-
-function kill_dashboard() {
-  pid=$(ps aux | grep 'kubectl proxy' | grep -v grep | awk '{print $2}')
-  if ! [ -z $pid ]; then
-    echo "Killing old dashboard process"
-    kill -9 $pid
-  fi
-}
-
-source ~/.kube/functions.sh
+source $HOME/civis-kubectl-configs/functions.sh
 {{- end }}

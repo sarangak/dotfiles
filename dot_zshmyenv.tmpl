@@ -2,7 +2,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export TERM=xterm-256color
 
-export GIMMEROOT=$HOME/.gimme/versions/go1.16.2
+export GIMMEROOT=$HOME/.gimme/versions/go1.16.5
 {{- if eq .category "linux" }}
 export GOROOT=${GIMMEROOT}.linux.amd64
 {{- else }}
@@ -11,7 +11,7 @@ export GOROOT=${GIMMEROOT}.darwin.amd64
 export GOPATH=$HOME/golang
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH=$PATH:$HOME/bin:$HOME/.local/bin
+export PATH=$PATH:$HOME/bin:$HOME/.local/bin:$HOME/.poetry/bin
 
 # These commands change env vars
 export PATH=$PATH:$HOME/.rbenv/bin
