@@ -20,7 +20,7 @@ This function should only modify configuration layer settings."
    ;; installation feature and you have to explicitly list a layer in the
    ;; variable `dotspacemacs-configuration-layers' to install it.
    ;; (default 'unused)
-   dotspacemacs-enable-lazy-installation 'unused
+   dotspacemacs-enable-lazy-installation nil
 
    ;; If non-nil then Spacemacs will ask for confirmation before installing
    ;; a layer lazily. (default t)
@@ -39,17 +39,30 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ;; ansible  ;; Must disable ansible for now https://github.com/syl20bnr/spacemacs/issues/8027
+     asciidoc
      (auto-completion :variables
                       auto-completion-tab-key-behavior 'complete
-                      auto-completion-idle-delay 0.0
+                      auto-completion-idle-delay nil
                       auto-completion-minimum-prefix-length 1)
-     ;; better-defaults
-     clojure
+     (clojure :variables
+              ;; clojure-backend 'cider               ;; use cider and disable lsp
+              ;; clojure-enable-linters 'clj-kondo    ;; clj-kondo included in lsp
+              cider-repl-display-help-banner nil      ;; disable help banner
+              cider-pprint-fn 'fipp                   ;; fast pretty printing
+              clojure-indent-style 'align-arguments
+              clojure-align-forms-automatically t
+              clojure-toplevel-inside-comment-form t  ;; evaluate expressions in comment as top level
+              cider-result-overlay-position 'at-point ;; results shown right after expression
+              cider-overlays-use-font-lock t
+              cider-repl-buffer-size-limit 100        ;; limit lines shown in REPL buffer
+              )
      csv
      emacs-lisp
+     emoji
      ess
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
-     git
+     (git :variables
+          magit-diff-refine-hunk t)
      ;; Github processing is too slow with the Console repo
      ;; github
      (go :variables
@@ -57,20 +70,27 @@ This function should only modify configuration layer settings."
          go-format-before-save t
          gofmt-command "goimports"
          go-use-golangci-lint t)
+     graphviz
      (haskell :variables
               haskell-completion-backend 'dante)
-     helm
+     (helm :variables
+           helm-follow-mode-persistent t)
      html
      ;; ivy
      (javascript :variables
                  javascript-fmt-tool 'prettier
                  javascript-fmt-on-save t)
+     json
      latex
-     lsp
+     (lsp :variables
+          lsp-lens-enable t
+          lsp-file-watch-threshold 10000
+          lsp-log-io nil)
      lua
      (markdown :variables
                markdown-list-indent-width 2
                markdown-live-preview-engine 'vmd)
+     multiple-cursors
      nginx
      (org :variables
           org-enable-github-support t)
@@ -95,22 +115,28 @@ This function should only modify configuration layer settings."
      spell-checking
      sql
      syntax-checking
-     treemacs
+     (treemacs :variables
+               treemacs-indentation 1)
      (typescript :variables
                  typescript-fmt-on-save t
                  typescript-fmt-tool 'prettier)
-     ;; For a git-gutter style indicator
-     ;; (version-control :variables
-     ;;                  version-control-diff-tool 'diff-hl
-     ;;                  version-control-diff-side 'left)
-     yaml
-     )
+     (unicode-fonts :variables
+                    unicode-fonts-enable-ligatures t
+                    unicode-fonts-ligature-modes '(prog-mode))
 
-     ;; List of additional packages that will be installed without being
-     ;; wrapped in a layer. If you need some configuration for these
-     ;; packages, then consider creating a layer. You can also put the
-     ;; configuration in `dotspacemacs/user-config'.
-     dotspacemacs-additional-packages '(org-web-tools)
+     ;; For a git-gutter style indicator
+     (version-control :variables
+                      version-control-diff-tool 'diff-hl
+                      version-control-global-margin t)
+
+     yaml
+   )
+
+   ;; List of additional packages that will be installed without being
+   ;; wrapped in a layer. If you need some configuration for these
+   ;; packages, then consider creating a layer. You can also put the
+   ;; configuration in `dotspacemacs/user-config'.
+   dotspacemacs-additional-packages '(org-web-tools)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -272,8 +298,8 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
 
    ;; Default font or prioritized list of fonts.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+   dotspacemacs-default-font '("Fira Code"
+                               :size 13.0
                                :weight normal
                                :width normal)
    ;; The leader key
@@ -353,7 +379,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
-   dotspacemacs-loading-progress-bar t
+   dotspacemacs-loading-progress-bar nil
 
    ;; If non-nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
@@ -376,7 +402,7 @@ It should only modify the values of Spacemacs settings."
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
-   dotspacemacs-active-transparency 90
+   dotspacemacs-active-transparency 100
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's inactive or deselected.
@@ -418,19 +444,28 @@ It should only modify the values of Spacemacs settings."
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
    dotspacemacs-line-numbers '(:relative t
-                                         :size-limit-kb 200)
+                               :disabled-for-modes dired-mode
+                                                   doc-view-mode
+                                                   pdf-view-mode
+                               :size-limit-kb 200)
+
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
 
-   ;; If non-nil `smartparens-strict-mode' will be enabled in programming modes.
+   ;; If non-nil and `dotspacemacs-activate-smartparens-mode' is also non-nil,
+   ;; `smartparens-strict-mode' will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode nil
+   dotspacemacs-smartparens-strict-mode t
+
+   ;; If non-nil smartparens-mode will be enabled in programming modes.
+   ;; (default t)
+   dotspacemacs-activate-smartparens-mode t
 
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc...
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis nil
+   dotspacemacs-smart-closing-parenthesis t
 
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
@@ -725,6 +760,28 @@ layers configuration. You are free to put any user code."
 
   ;; Disable parinfer mode when editing this file
   (remove-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
+
+  ;; Emacs text rendering optimization
+  (setq-default bidi-paragraph-direction 'left-to-right)
+
+  (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
+  
+  ;; Show diff highlights in gutter as you type
+  (diff-hl-flydiff-mode)
+
+  ;; Clojure customizations
+  ;; Do not indent single ; comment characters in Clojure
+  (add-hook 'clojure-mode-hook (lambda () (setq-local comment-column 0)))
+
+  ;; Change auto indent size for languages in html layer (web mode) to 2 (defaults to 4)
+  (defun web-mode-indent-2-hook ()
+    "Indent settings for languages in Web mode, markup=html, css=css, code=javascript/php/etc."
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset  2)
+    (setq web-mode-code-indent-offset 2))
+  ;;
+  (add-hook 'web-mode-hook  'web-mode-indent-2-hook)
+
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
