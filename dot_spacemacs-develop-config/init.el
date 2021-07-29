@@ -57,7 +57,8 @@ This function should only modify configuration layer settings."
          go-format-before-save t
          gofmt-command "goimports"
          go-use-golangci-lint t)
-     haskell
+     (haskell :variables
+              haskell-completion-backend 'dante)
      helm
      html
      ;; ivy
@@ -73,7 +74,6 @@ This function should only modify configuration layer settings."
      nginx
      (org :variables
           org-enable-github-support t)
-     parinfer
      ;; perl5
      ;; php
      (python :variables
@@ -103,14 +103,14 @@ This function should only modify configuration layer settings."
      ;; (version-control :variables
      ;;                  version-control-diff-tool 'diff-hl
      ;;                  version-control-diff-side 'left)
-     yaml)
-   
+     yaml
+     )
 
-   ;; List of additional packages that will be installed without being
-   ;; wrapped in a layer. If you need some configuration for these
-   ;; packages, then consider creating a layer. You can also put the
-   ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(org-web-tools)
+     ;; List of additional packages that will be installed without being
+     ;; wrapped in a layer. If you need some configuration for these
+     ;; packages, then consider creating a layer. You can also put the
+     ;; configuration in `dotspacemacs/user-config'.
+     dotspacemacs-additional-packages '(org-web-tools)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -123,7 +123,9 @@ This function should only modify configuration layer settings."
    ;; installs only the used packages but won't delete unused ones. `all'
    ;; installs *all* packages supported by Spacemacs and never uninstalls them.
    ;; (default is `used-only')
-   dotspacemacs-install-packages 'used-only))
+   dotspacemacs-install-packages 'used-only
+  )
+)
 
 (defun dotspacemacs/init ()
   "Initialization:
@@ -582,7 +584,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
     "Insert RFC 3339 timestamp into current buffer"
     (interactive)
     (insert (shell-command-to-string "echo -n $(gdate --rfc-3339=seconds)")))
-  (setq-default evil-snipe-use-vim-sneak-bindings t))
+  (setq-default evil-snipe-use-vim-sneak-bindings t)
+
+  (spacemacs|use-package-add-hook org
+    :post-config (add-to-list 'org-babel-load-languages '(haskell . t)))
+
+)
 
 
 (defun dotspacemacs/user-config ()
@@ -718,7 +725,7 @@ layers configuration. You are free to put any user code."
 
   ;; Disable parinfer mode when editing this file
   (remove-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
-  )
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
