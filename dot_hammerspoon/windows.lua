@@ -132,15 +132,20 @@ hs.hotkey.bind('ctrl-alt', "o", nil, vimiumTabSwitch)
 -- Screen capture current window
 ------------------------------------------------------------
 --[[
-  Make cmd + alt + shift + s take a screenshot of the current window.  Global vars like `screenshotPrefix` are used to customize the filename and location of screenshots. Used to make it more efficient to capture screenshots.
+  Make cmd + alt + shift + s save a screenshot of the current window.  Global vars like `screenshotPrefix` are used to customize the filename and location of screenshots. Used to make it more efficient to capture screenshots.
 --]]
-screenshotPrefix = ""
+screenshotDir = "Desktop"
+screenshotPrefix = "ss-"
 local function screenCapture()
   local timeStamp = string.gsub(os.date("%Y%m%d_%T"), ":", "")
-  local fileName = os.getenv("HOME") .. "/Desktop/" .. screenshotPrefix .. "ss-" .. timeStamp .. ".png"
+  local fileName = os.getenv("HOME") .. "/" .. screenshotDir .. "/" .. screenshotPrefix .. timeStamp .. ".png"
   local windowId = hs.window.frontmostWindow():id()
   hs.alert.show("Capturing to " .. fileName)
-  hs.task.new("/usr/sbin/screencapture", nil, {"-l" .. windowId, fileName }):start()
+  local saveToClip = function(exitCode, stdOut, std)
+      local image = hs.image.imageFromPath(fileName)
+      hs.pasteboard.writeObjects(image)
+  end
+  hs.task.new("/usr/sbin/screencapture", saveToClip, {"-l" .. windowId, fileName }):start()
 end
 hs.hotkey.bind('cmd-alt-shift', "s", nil, screenCapture)
 
