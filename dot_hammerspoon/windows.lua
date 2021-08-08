@@ -87,14 +87,14 @@ hs.hotkey.bind({"ctrl", "alt"}, ';', showAppExpose)
 hs.fnutils.each({
     { key = "b", app = 'Google Chrome' },
     { key = "h", app = 'Slack' },
-    { key = "m", app = "iTerm" },
+    { key = "m", app = "iTerm2" },
     { key = "space", app = "Emacs" },
   },
   function(object)
     local appKey = object.key
     local appName = object.app
     local function switchApp()
-      local hsapp = hs.application.find(appName)
+      local hsapp = hs.application.get(appName)
 
       if hsapp and hsapp:mainWindow() then
         hsapp:mainWindow():focus()

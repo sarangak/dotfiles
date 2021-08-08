@@ -299,7 +299,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font or prioritized list of fonts.
    dotspacemacs-default-font '("Fira Code"
-                               :size 13.0
+                               :size 12.0
                                :weight normal
                                :width normal)
    ;; The leader key
