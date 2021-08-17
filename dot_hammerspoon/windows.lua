@@ -85,10 +85,10 @@ hs.hotkey.bind({"ctrl", "alt"}, ';', showAppExpose)
 --]]
 
 hs.fnutils.each({
-    { key = "b", app = 'Google Chrome' },
-    { key = "h", app = 'Slack' },
-    { key = "m", app = "iTerm2" },
-    { key = "space", app = "Emacs" },
+    { key = "b", app = 'com.google.Chrome' },
+    { key = "h", app = 'com.tinyspeck.slackmacgap' },
+    { key = "m", app = 'com.googlecode.iterm2' },
+    { key = "space", app = 'org.gnu.Emacs' },
   },
   function(object)
     local appKey = object.key
@@ -102,7 +102,7 @@ hs.fnutils.each({
         -- hsapp:setFrontmost()
       else
         -- launchOrFocus will bring all windows of the application forward, which is not what I want
-        hs.application.launchOrFocus(appName)
+        hs.application.launchOrFocusByBundleID(appName)
       end
     end
 
