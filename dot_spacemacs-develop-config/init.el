@@ -73,8 +73,7 @@ This function should only modify configuration layer settings."
      graphviz
      (haskell :variables
               haskell-completion-backend 'dante)
-     (helm :variables
-           helm-follow-mode-persistent t)
+     helm
      html
      ;; ivy
      (javascript :variables
@@ -600,12 +599,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
     "Align the given region for key: value content"
     (interactive)
     (align-regexp beg end ":\\(\\s-*\\)" 1 1 nil))
-  (defun private/evil-select-pasted ()
-    "Visually select last pasted text."
-    (interactive)
-    (evil-goto-mark ?\[)
-    (evil-visual-char)
-    (evil-goto-mark ?\]))
   ;; The semantic package in Spacemacs wants to parse every buffer, which is no good!
   (defun private/reformat-lisp ()
     "Use srefactor to format lisp code"
