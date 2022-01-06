@@ -80,6 +80,7 @@ This function should only modify configuration layer settings."
                  javascript-fmt-tool 'prettier
                  javascript-fmt-on-save t)
      json
+     jsonnet
      latex
      (lsp :variables
           lsp-lens-enable t
@@ -97,7 +98,7 @@ This function should only modify configuration layer settings."
      ;; php
      (python :variables
              python-enable-yapf-format-on-save t
-             python-auto-set-local-pyenv-version 'on-project-switch)
+             python-backend 'anaconda)
      react
      (ruby :variables
            ruby-insert-encoding-magic-comment nil
