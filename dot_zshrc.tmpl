@@ -59,7 +59,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git history-substring-search z zsh-syntax-highlighting)
+plugins=(git history-substring-search zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -116,7 +116,9 @@ alias gcod="git checkout -- db/schema.rb"
 # Utility aliases
 alias hgrep='history | egrep -i'
 alias beep="echo -e '\a'"
-alias ll="ls -lah"
+alias ll="exa -la"
+alias cat="bat"
+alias man="batman"
 alias jd='[ 0 = 0 ] && echo -e '\''good\a'\'' || echo -e '\''bad\a'\'''
 alias bcf='bundle; bundle clean --force'
 
@@ -139,6 +141,15 @@ bindkey -M emacs '^N' history-substring-search-down
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# fzf zsh integration (assumes fzf is installed by nix)
+if [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
+fi
+
+eval "$(zoxide init zsh)"
+
 
 {{- if eq .category "work" }}
 export KUBECONFIG=$HOME/civis-kubectl-configs/config
