@@ -1241,6 +1241,17 @@
 					<key>Text</key>
 					<string>0x1f</string>
 				</dict>
+				<key>0x2e-0x100000-0x2f</key>
+				<dict>
+					<key>Action</key>
+					<integer>10</integer>
+					<key>Label</key>
+					<string></string>
+					<key>Text</key>
+					<string>.</string>
+					<key>Version</key>
+					<integer>1</integer>
+				</dict>
 				<key>0x32-0x40000</key>
 				<dict>
 					<key>Action</key>
@@ -1515,6 +1526,8 @@
 					<string>[1;5F</string>
 				</dict>
 			</dict>
+			<key>Left Option Key Changeable</key>
+			<true/>
 			<key>Link Color</key>
 			<dict>
 				<key>Alpha Component</key>
