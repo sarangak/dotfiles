@@ -93,6 +93,7 @@ This function should only modify configuration layer settings."
      multiple-cursors
      nginx
      (org :variables
+          org-src-tab-acts-natively nil
           org-enable-github-support t)
      ;; perl5
      ;; php
@@ -456,16 +457,16 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil and `dotspacemacs-activate-smartparens-mode' is also non-nil,
    ;; `smartparens-strict-mode' will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode t
+   dotspacemacs-smartparens-strict-mode nil
 
    ;; If non-nil smartparens-mode will be enabled in programming modes.
    ;; (default t)
-   dotspacemacs-activate-smartparens-mode t
+   dotspacemacs-activate-smartparens-mode nil
 
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc...
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis t
+   dotspacemacs-smart-closing-parenthesis nil
 
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and

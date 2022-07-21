@@ -5,6 +5,8 @@ export TERM=xterm-256color
 export GIMMEROOT=$HOME/.gimme/versions/go1.16.5
 {{- if eq .category "linux" }}
 export GOROOT=${GIMMEROOT}.linux.amd64
+{{- else if eq .arch "arm64" }}
+export GOROOT=${GIMMEROOT}.darwin.arm64
 {{- else }}
 export GOROOT=${GIMMEROOT}.darwin.amd64
 {{- end }}
@@ -17,7 +19,9 @@ export PATH=$PATH:$HOME/bin:$HOME/.local/bin
 export PATH=$PATH:$HOME/.rbenv/bin
 eval "$(rbenv init -)"
 
+{{- if ne .arch "arm64"}}
 . $HOME/.nix-profile/etc/profile.d/nix.sh
+{{- end }}
 
 {{- if eq .category "work" }}
 # Inject GITHUB_TOKEN into env
