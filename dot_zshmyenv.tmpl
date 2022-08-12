@@ -19,6 +19,10 @@ export PATH=$PATH:$HOME/bin:$HOME/.local/bin
 export PATH=$PATH:$HOME/.rbenv/bin
 eval "$(rbenv init -)"
 
+{{- if eq .category "linux" }}
+export LOCALE_ARCHIVE=$HOME/.nix-profile/lib/locale/locale-archive
+{{- end }}
+
 {{- if ne .arch "arm64"}}
 . $HOME/.nix-profile/etc/profile.d/nix.sh
 {{- end }}
@@ -39,6 +43,10 @@ if [ -f '/Users/saranga/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/s
 {{- end }}
 
 # Pyenv
+{{- if eq .category "linux" }}
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+{{- end }}
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
