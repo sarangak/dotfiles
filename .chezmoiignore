@@ -2,3 +2,6 @@ README.md
 {{- if eq .category "work" }}
 .gitconfig # don't sync gitconfig at work
 {{- end }}
+{{- if ne .category "work" }}
+maint-pod.sh
+{{- end }}
