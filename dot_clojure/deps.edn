@@ -1,0 +1,10 @@
+{
+  :aliases {
+    :neil {:deps {io.github.babashka/neil {:git/tag "v0.1.47"
+                                           :git/sha "4515ec2"}}
+           :main-opts ["-m" "babashka.neil"]} 
+    :new {:extra-deps {seancorfield/clj-new
+                       {:mvn/version "1.0.199"}}
+          :main-opts ["-m" "clj-new.create"]}
+  }
+}
