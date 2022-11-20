@@ -97,31 +97,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-{{- if eq .category "work" }}
-# Aliases for working with local dev platform
-docker_compose_exec() {
-    docker-compose exec console "$@"
-}
-alias dc="docker-compose"
-alias dcu="docker-compose up -d"
-alias dch="docker-compose stop"
-alias dcrmall="docker-compose rm console; docker-compose rm delayed_job; docker image rm civis_console_dev; docker system prune -a --volumes"
-alias dcs="docker_compose_exec /bin/bash"
-alias dcl="docker-compose logs"
-alias dclf="dcl --tail=10 -f"
-dcsudo() {
-    docker exec -u root -it $(docker ps -aqf "name=console_console") /bin/bash
-}
-
-alias rb="docker_compose_exec bundle"
-alias rs="docker_compose_exec bash -c 'DISABLE_SPRING=1 bundle exec rails server -b 0.0.0.0'"
-alias rw="docker_compose_exec bash -c 'bundle exec rake jobs:work'"
-alias rc="docker_compose_exec bash -c 'bundle exec rails console'"
-alias dcmb="docker-compose exec mysql bash -c 'mysqldump console_development' > ~/dbbackups/console_dev_`gdate +%s%N`.sql"
-alias rdb="dcmb && docker_compose_exec bash -c 'bundle; npm install; bundle exec rake db:migrate'"
-alias gcod="git checkout -- db/schema.rb"
-{{- end }}
-
 # Utility aliases
 alias hgrep='history | egrep -i'
 alias beep="echo -e '\a'"
@@ -176,9 +151,3 @@ function z () {
 alias zi='__zoxide_zi'
 alias cd=z
 
-
-{{- if eq .category "work" }}
-export KUBECONFIG=$HOME/civis-kubectl-configs/config
-
-source $HOME/civis-kubectl-configs/functions.sh
-{{- end }}

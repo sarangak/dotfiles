@@ -27,11 +27,6 @@ export LOCALE_ARCHIVE=$HOME/.nix-profile/lib/locale/locale-archive
 . $HOME/.nix-profile/etc/profile.d/nix.sh
 {{- end }}
 
-{{- if eq .category "work" }}
-# Inject GITHUB_TOKEN into env
-source $HOME/.secrets
-{{- end }}
-
 {{- if eq .category "personal" }}
 {{- if ne .arch "arm64"}}
 if [ -f ~/.local/share/google-cloud-sdk/path.zsh.inc ]; then source ~/.local/share/google-cloud-sdk/path.zsh.inc; fi
