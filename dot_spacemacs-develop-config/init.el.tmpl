@@ -660,27 +660,6 @@ layers configuration. You are free to put any user code."
   (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
   ;; Treat underscore as a symbol in Ruby so autocomplete includes whole identifiers
   (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "_")))
-  ;; Fix Coffeescript indentation per https://github.com/syl20bnr/spacemacs/issues/7682#issuecomment-314691091
-  ;; Remove spacemacs hook for coffee-mode
-  (remove-hook 'coffee-mode-hook '(lambda ()
-                                    (setq indent-line-function 'javascript/coffee-indent
-                                          evil-shift-width coffee-tab-width)))
-
-  ;; For haml-lint
-  ;; From https://gist.github.com/mbreit/229d2528604af2f8db37
-  (flycheck-def-config-file-var flycheck-haml-lintrc haml-lint ".haml-lint.yml"
-    :safe #'stringp)
-  (flycheck-define-checker haml-lint
-    "A haml-lint syntax checker"
-    :command ("haml-lint"
-              (config-file "--config" flycheck-haml-lintrc)
-              source)
-    :error-patterns
-    ((warning line-start
-              (file-name) ":" line " [W] "  (message)
-              line-end))
-    :modes (haml-mode))
-  (add-to-list 'flycheck-checkers 'haml-lint)
 
   ;; So hippie-expand will try elements from the kill ring
   (setq hippie-expand-try-functions-list '(try-expand-whole-kill
@@ -810,7 +789,6 @@ layers configuration. You are free to put any user code."
  ;; If there is more than one, they won't work right.
  '(ac-disable-faces nil)
  '(avy-subword-extra-word-chars nil)
- '(coffee-indent-like-python-mode t)
  '(compilation-message-face (quote default))
  '(doc-view-scale-internally nil)
  '(eshell-buffer-shorthand nil t)
@@ -818,8 +796,6 @@ layers configuration. You are free to put any user code."
  '(evil-ex-visual-char-range t)
  '(evil-want-Y-yank-to-eol t)
  '(evil-want-fine-undo t)
- '(flycheck-coffeelintrc "coffeelint.json")
- '(flycheck-disabled-checkers (quote (haml)))
  '(font-latex-fontify-sectioning (quote color))
  '(frame-resize-pixelwise t)
  '(global-subword-mode t)
