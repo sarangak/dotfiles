@@ -137,7 +137,13 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(org-web-tools)
+   dotspacemacs-additional-packages '(org-web-tools
+                                      cue-mode
+                                      (copilot :location (recipe
+                                                          :fetcher github
+                                                          :repo "zerolfx/copilot.el"
+                                                          :files ("*.el" "dist")))
+                                      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -626,11 +632,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
-  (setq-default
    {{- if ne .arch "arm64" }}
-   multi-term-program "/usr/local/bin/zsh")
+   (setq-default multi-term-program "/usr/local/bin/zsh")
    {{- else }}
-   multi-term-program "/opt/homebrew/bin/zsh")
+   (setq-default multi-term-program "/opt/homebrew/bin/zsh")
    {{- end }}
 
   (spacemacs/set-leader-keys
@@ -764,7 +769,7 @@ layers configuration. You are free to put any user code."
   (setq-default bidi-paragraph-direction 'left-to-right)
 
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
-  
+
   ;; Show diff highlights in gutter as you type
   (diff-hl-flydiff-mode)
 
@@ -781,6 +786,19 @@ layers configuration. You are free to put any user code."
   ;;
   (add-hook 'web-mode-hook  'web-mode-indent-2-hook)
 
+  ;; accept completion from copilot and fallback to company
+  (with-eval-after-load 'company
+    ;; disable inline previews
+    (delq 'company-preview-if-just-one-frontend company-frontends))
+
+  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+
+
+  (add-hook 'prog-mode-hook 'copilot-mode)
+
+  (define-key evil-insert-state-map (kbd "C-<tab>") 'copilot-accept-completion-by-word)
+  (define-key evil-insert-state-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
