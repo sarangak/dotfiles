@@ -49,6 +49,9 @@ eval "$(pyenv init -)"
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+# Set MAMBA paths
+export MAMBA_EXE="$HOME/.local/bin/micromamba";
+export MAMBA_ROOT_PREFIX="$HOME/micromamba";
 # Since virtualenvwrapper startup is slow, don't do it by default
 alias pystart='source /usr/local/bin/virtualenvwrapper.sh; eval "$(micromamba shell hook --shell=zsh)"'
 
