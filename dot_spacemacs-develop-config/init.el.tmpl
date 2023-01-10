@@ -722,9 +722,6 @@ layers configuration. You are free to put any user code."
   (define-key evil-inner-text-objects-map evil-textobj-line-i-key 'evil-inner-line)
   ;; END evil-textobj-line
 
-  ;; Use emacs virtualenv
-  (pyvenv-workon "emacs")
-
   ;; Fix for org-mode easy templates moved into their own package
   (when (version<= "9.2" (org-version))
     (require 'org-tempo))

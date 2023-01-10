@@ -50,7 +50,7 @@ export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 # Since virtualenvwrapper startup is slow, don't do it by default
-alias pystart="source /usr/local/bin/virtualenvwrapper.sh"
+alias pystart='source /usr/local/bin/virtualenvwrapper.sh; eval "$(micromamba shell hook --shell=zsh)"'
 
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
