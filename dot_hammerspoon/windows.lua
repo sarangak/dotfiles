@@ -15,7 +15,6 @@
 --]]
 
 -- Settings
-hs.window.animationDuration = 0
 hs.window.switcher.ui.showSelectedTitle = false
 hs.window.switcher.ui.showSelectedThumbnail = true
 hs.window.switcher.ui.showThumbnails = false
@@ -24,15 +23,8 @@ hs.window.switcher.ui.showThumbnails = false
 hs.window.filter.default:allowApp'1Password mini'
 hs.window.filter.default:allowApp'1Password Extension Helper'
 
-local switcher = hs.window.switcher.new()
-local function nextWindow()
-  switcher:next()
-end
-local function prevWindow()
-  switcher:previous()
-end
-hs.hotkey.bind('alt', 'tab', nextWindow)
-hs.hotkey.bind({'alt', 'shift'}, 'tab', prevWindow)
+hs.hotkey.bind('alt', 'tab', hs.window.switcher.nextWindow)
+hs.hotkey.bind({'alt', 'shift'}, 'tab', hs.window.switcher.previousWindow)
 
 local mySwitchers = {}
 local function currentAppSwitcher()
@@ -88,6 +80,7 @@ hs.fnutils.each({
     { key = "b", app = 'com.google.Chrome' },
     { key = "h", app = 'com.tinyspeck.slackmacgap' },
     { key = "m", app = 'com.googlecode.iterm2' },
+    { key = "v", app = 'com.microsoft.VSCode' },
     { key = "space", app = 'org.gnu.Emacs' },
   },
   function(object)

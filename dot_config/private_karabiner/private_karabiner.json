@@ -874,7 +874,7 @@
                   "key_code": "v",
                   "modifiers": {
                     "mandatory": ["control"],
-                    "optional": ["any"]
+                    "optional": ["shift"]
                   }
                 },
                 "to": [
