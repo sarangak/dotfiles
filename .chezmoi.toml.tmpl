@@ -1,5 +1,5 @@
-{{- $category := promptString "category" -}}
-{{- $arch := promptString "arch" -}}
+{{- $category := promptString "category (personal, linux, work): " -}}
+{{- $arch := promptString "arch (arm64, amd64): " -}}
 [data]
   category = "{{ $category }}"
   arch = "{{ $arch }}"

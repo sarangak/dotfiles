@@ -354,15 +354,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
     "Invoke `eshell' in the project's root."
     (interactive)
     (projectile-with-default-dir (projectile-project-root) (eshell)))
-  (defun private/open-local-platform-in-browser ()
-    "Open a browser window to local civis"
-    (interactive)
-    (browse-url "http://platform.civis.test:3000"))
-
-  (defun private/open-local-platform-in-browser ()
-    "Open a browser window to local civis"
-    (interactive)
-    (browse-url "http://platform.civis.test:3000"))
 
   (defun private/show-and-copy-buffer-filename-from-root ()
     "Show the relative path to the current file in the minibuffer."
@@ -554,8 +545,6 @@ layers configuration. You are free to put any user code."
  '(avy-subword-extra-word-chars nil)
  '(coffee-indent-like-python-mode t)
  '(compilation-message-face (quote default))
- '(deft-directory
-    "~/Box Sync/Notes (skomanduri@civisanalytics.com)/Notes/deft")
  '(doc-view-scale-internally nil)
  '(eshell-buffer-shorthand nil t)
  '(eshell-history-size 10000 t)
@@ -634,8 +623,6 @@ This function is called at the very end of Spacemacs initialization."
  '(custom-safe-themes
    (quote
     ("1e3b2c9e7e84bb886739604eae91a9afbdfb2e269936ec5dd4a9d3b7a943af7f" default)))
- '(deft-directory
-    "~/Box Sync/Notes (skomanduri@civisanalytics.com)/Notes/deft")
  '(doc-view-scale-internally nil)
  '(eshell-buffer-shorthand nil t)
  '(eshell-history-size 10000 t)
