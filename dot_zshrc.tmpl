@@ -107,6 +107,24 @@ alias pcat="prettybat"
 alias jd='[ 0 = 0 ] && echo -e '\''good\a'\'' || echo -e '\''bad\a'\'''
 alias bcf='bundle; bundle clean --force'
 
+{{ if ne .category "linux" -}}
+function ramdisk() {
+  local SIZE_IN_MB=$1
+  local output=$(hdiutil attach -nobrowse -nomount ram://$((2 * 1024 * SIZE_IN_MB)))
+  local ramdiskpath=$(echo "$output" | grep "/dev/disk" | awk '{print $1}')
+  echo $ramdiskpath
+
+  if [ -z "$ramdiskpath" ]; then
+    echo "Error: Could not create RAM disk."
+    return 1
+  fi
+
+  diskutil eraseVolume HFS+ RAMDisk "$ramdiskpath"
+  cd /Volumes/RAMDisk
+  alias rmramdisk="hdiutil detach $ramdiskpath"
+}
+{{- end }}
+
 # Utility aliases for Docker
 alias dockershell="docker run --rm -i -t --entrypoint=/bin/bash"
 alias dockershellsh="docker run --rm -i -t --entrypoint=/bin/sh"
