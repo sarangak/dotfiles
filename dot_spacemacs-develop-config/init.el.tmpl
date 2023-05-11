@@ -117,6 +117,9 @@ This function should only modify configuration layer settings."
      spell-checking
      sql
      syntax-checking
+     (terraform :variables
+                terraform-auto-format-on-save t
+                terraform-backend 'lsp)
      (treemacs :variables
                treemacs-indentation 1)
      (typescript :variables
