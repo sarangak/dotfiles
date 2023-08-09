@@ -91,6 +91,7 @@ This function should only modify configuration layer settings."
                markdown-list-indent-width 2
                markdown-live-preview-engine 'vmd)
      multiple-cursors
+     neotree
      nginx
      nixos
      (org :variables
@@ -108,9 +109,14 @@ This function should only modify configuration layer settings."
      ruby-on-rails
      rust
      (shell :variables
+            {{- if eq .category "linux" }}
+            shell-default-term-shell "/usr/bin/zsh"
+            {{- else }}
+            shell-default-term-shell "/opt/homebrew/bin/zsh"
+            {{- end }}
             shell-default-position 'bottom
             shell-enable-smart-eshell t
-            shell-default-shell 'multi-term)
+            shell-default-shell 'multi-vterm)
      shell-scripts
      (spacemacs-layouts :variables
                         spacemacs-layouts-restrict-spc-tab t
@@ -121,8 +127,6 @@ This function should only modify configuration layer settings."
      (terraform :variables
                 terraform-auto-format-on-save t
                 terraform-backend 'lsp)
-     (treemacs :variables
-               treemacs-indentation 1)
      (typescript :variables
                  typescript-fmt-on-save t
                  typescript-fmt-tool 'prettier)
