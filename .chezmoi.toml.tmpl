@@ -5,3 +5,10 @@
   arch = "{{ $arch }}"
   home = "{{ env "HOME" }}"
   user = "{{ env "USER" }}"
+
+{{ if eq .category "work" }}
+encryption = "age"
+[age]
+    identity = "~/.ssh/id_ed25519"
+    symmetric = true
+{{- end }}

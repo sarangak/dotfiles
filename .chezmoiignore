@@ -3,5 +3,5 @@ README.md
 .gitconfig # don't sync gitconfig at work
 {{- end }}
 {{- if ne .category "work" }}
-maint-pod.sh
+.bashrc
 {{- end }}
