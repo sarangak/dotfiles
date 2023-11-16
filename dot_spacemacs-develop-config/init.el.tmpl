@@ -660,6 +660,8 @@ layers configuration. You are free to put any user code."
   (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
   ;; Treat underscore as a symbol in Ruby so autocomplete includes whole identifiers
   (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "_")))
+  ;; Treat period as a symbol in Terraform so you can grab whole resource names
+  (add-hook 'terraform-mode-hook #'(lambda () (modify-syntax-entry ?. "_")))
 
   ;; So hippie-expand will try elements from the kill ring
   (setq hippie-expand-try-functions-list '(try-expand-whole-kill

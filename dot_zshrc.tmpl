@@ -138,6 +138,10 @@ function dockershellshhere() {
     docker run --rm -it --entrypoint=/bin/sh -v `pwd`:/${dirname} -w /${dirname} "$@"
 }
 
+{{ if eq .category "work" -}}
+source $HOME/.zshworkrc
+{{- end }}
+
 # History substring search
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
