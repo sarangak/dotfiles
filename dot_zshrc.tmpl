@@ -104,7 +104,7 @@ alias ll="exa -la"
 alias cat="bat"
 alias man="batman"
 alias pcat="prettybat"
-alias jd='[ 0 = 0 ] && echo -e '\''good\a'\'' || echo -e '\''bad\a'\'''
+alias jd='[[ $? -eq 0 ]] && say "succeeded" || say "failed"'
 alias bcf='bundle; bundle clean --force'
 
 {{ if ne .category "linux" -}}
