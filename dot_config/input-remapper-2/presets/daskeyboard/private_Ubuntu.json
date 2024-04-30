@@ -1,0 +1,15 @@
+[
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 58,
+                "origin_hash": "e8e394deb66c29977eb7d6755d2de9cb"
+            }
+        ],
+        "target_uinput": "keyboard",
+        "output_symbol": "if_single(key(Escape), hold(Control_L))\n",
+        "name": "caps lock",
+        "mapping_type": "key_macro"
+    }
+]

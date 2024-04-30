@@ -19,12 +19,12 @@ export PATH=$PATH:$HOME/bin:$HOME/.local/bin
 export PATH=$PATH:$HOME/.rbenv/bin
 eval "$(rbenv init -)"
 
-{{- if eq .category "linux" }}
-export LOCALE_ARCHIVE=$HOME/.nix-profile/lib/locale/locale-archive
+{{- if ne .arch "arm64"}}
+. /etc/profile.d/nix.sh
 {{- end }}
 
-{{- if ne .arch "arm64"}}
-. $HOME/.nix-profile/etc/profile.d/nix.sh
+{{- if eq .category "linux" }}
+export LOCALE_ARCHIVE="$(nix-env --installed --no-name --out-path --query glibc-locales)/lib/locale/locale-archive"
 {{- end }}
 
 {{- if eq .category "personal" }}

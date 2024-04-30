@@ -1,7 +1,11 @@
 [user]
 	email = sarangak@cs.cmu.edu
 	name = Saranga Komanduri
+{{- if eq .category "linux" }}
+	signingkey = /home/saranga/.ssh/id_rsa.pub
+{{- else }}
 	signingkey = /Users/saranga/.ssh/id_rsa.pub
+{{- end }}
 [pull]
 	rebase = false
 [credential "https://source.developers.google.com"]
