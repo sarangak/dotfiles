@@ -134,6 +134,10 @@ This function should only modify configuration layer settings."
                     unicode-fonts-enable-ligatures t
                     unicode-fonts-ligature-modes '(prog-mode))
 
+    {{- if eq .category "work" }}
+    windows-scripts
+    {{- end }}
+
      ;; For a git-gutter style indicator
      (version-control :variables
                       version-control-diff-tool 'diff-hl
