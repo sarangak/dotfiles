@@ -6,7 +6,7 @@
   home = "{{ env "HOME" }}"
   user = "{{ env "USER" }}"
 
-{{ if eq $category "work" }}
+{{ if eq .category "work" }}
 encryption = "age"
 [age]
     identity = "~/.ssh/id_ed25519"
