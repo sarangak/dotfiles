@@ -161,7 +161,7 @@ local function toggleMute()
     return
   end
 
-  local zoomWindow = hs.window.find('^Zoom Meeting')
+  local zoomWindow = hs.window.find('^Zoom Meeting') or hs.window.find('^Zoom Workplace')
   if zoomWindow then
     zoomWindow:focus()
     -- Zoom's keyboard shortcut for muting the microphone is shift-cmd-a
