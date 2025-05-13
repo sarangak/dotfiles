@@ -134,17 +134,13 @@ This function should only modify configuration layer settings."
                     unicode-fonts-enable-ligatures t
                     unicode-fonts-ligature-modes '(prog-mode))
 
-    {{- if eq .category "work" }}
-    windows-scripts
-    {{- end }}
-
      ;; For a git-gutter style indicator
      (version-control :variables
                       version-control-diff-tool 'diff-hl
                       version-control-global-margin t)
 
      yaml
-   )
+     )
 
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -152,10 +148,6 @@ This function should only modify configuration layer settings."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(org-web-tools
                                       cue-mode
-                                      (copilot :location (recipe
-                                                          :fetcher github
-                                                          :repo "zerolfx/copilot.el"
-                                                          :files ("*.el" "dist")))
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -170,8 +162,8 @@ This function should only modify configuration layer settings."
    ;; installs *all* packages supported by Spacemacs and never uninstalls them.
    ;; (default is `used-only')
    dotspacemacs-install-packages 'used-only
+   )
   )
-)
 
 (defun dotspacemacs/init ()
   "Initialization:
@@ -464,10 +456,10 @@ It should only modify the values of Spacemacs settings."
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
    dotspacemacs-line-numbers '(:relative t
-                               :disabled-for-modes dired-mode
-                                                   doc-view-mode
-                                                   pdf-view-mode
-                               :size-limit-kb 200)
+                                         :disabled-for-modes dired-mode
+                                         doc-view-mode
+                                         pdf-view-mode
+                                         :size-limit-kb 200)
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -629,7 +621,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (spacemacs|use-package-add-hook org
     :post-config (add-to-list 'org-babel-load-languages '(haskell . t)))
 
-)
+  )
 
 
 (defun dotspacemacs/user-config ()
@@ -757,22 +749,7 @@ layers configuration. You are free to put any user code."
     (setq web-mode-code-indent-offset 2))
   ;;
   (add-hook 'web-mode-hook  'web-mode-indent-2-hook)
-
-  ;; accept completion from copilot and fallback to company
-  (with-eval-after-load 'company
-    ;; disable inline previews
-    (delq 'company-preview-if-just-one-frontend company-frontends))
-
-  (with-eval-after-load 'copilot
-    (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-    (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
   )
-  (define-key evil-insert-state-map (kbd "<backtab>") 'copilot-next-completion)
-
-  (add-hook 'prog-mode-hook 'copilot-mode)
-  (define-key evil-insert-state-map (kbd "C-<tab>") 'copilot-accept-completion-by-word)
-  (define-key evil-insert-state-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
-)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -796,7 +773,7 @@ layers configuration. You are free to put any user code."
  '(grep-find-ignored-directories
    (quote
     ("SCCS" "RCS" "CVS" "MCVS" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "log" "vendor")))
- '(helm-ag-command-option "-S --ignore=vendor --ignore=reveal.js --max-columns=0")
+ '(helm-ag-command-option "-S --max-columns=150 --max-columns-preview")
  '(helm-grep-ignored-directories
    (quote
     ("SCCS" "RCS" "CVS" "MCVS" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".gvfs" "log" "vendor" "reveal.js")))

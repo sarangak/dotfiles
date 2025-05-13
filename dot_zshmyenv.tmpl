@@ -58,9 +58,14 @@ alias pystart='source /usr/local/bin/virtualenvwrapper.sh; eval "$(micromamba sh
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
 
-# Since nvm is slow, don't do it by default either
+{{- if eq .category "work" }}
+export NVM_DIR="$HOME/.nvm"
+. "$NVM_DIR/nvm.sh"
+. "$NVM_DIR/bash_completion"
+{{- else }}
+# Since nvm is slow, don't do it by default
 alias nvmstart='export NVM_DIR="$HOME/.nvm"; \. "$NVM_DIR/nvm.sh"; \. "$NVM_DIR/bash_completion"'
-
+{{- end }}
 
 {{- if not (eq .category "linux")}}
 export HOMEBREW_NO_AUTO_UPDATE=1 
