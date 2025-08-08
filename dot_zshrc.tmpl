@@ -177,31 +177,186 @@ function z () {
 alias zi='__zoxide_zi'
 alias cd=z
 
+# ------------------------------------------------------------------------------
+# pcodex: prompts OpenAI's Codex CLI
+#
+# Usage: pcodex [-m model] [-a approval_mode] [-u] "prompt text"
+#
+# Options:
+#   -m model:           Specify the model to use (e.g., "o3"). Defaults to "o3".
+#   -a approval_mode:   Set the approval mode ('suggest', 'always', 'never').
+#                       Defaults to 'suggest'.
+#   -u:                 Update the @openai/codex-cli package and exit.
+#
 function pcodex () {
-    local model='o3'          # -m
-    local approval='suggest'  # -a
+  local model='gpt-5'
+  local approval='suggest'
+  local pkg_name='@openai/codex'
 
-    local OPTIND opt
-    while getopts ":m:a:" opt; do
-        case "$opt" in
-            m) model="$OPTARG" ;;
-            a) approval="$OPTARG" ;;
-            *)  echo "Usage: pcodex [-m model] [-a approval_mode] \"prompt text\""
-                return 1 ;;
-        esac
-    done
-    shift $((OPTIND-1))            # remove processed options
-
-    if (( $# == 0 )); then
-        echo "Error: no prompt supplied."
-        echo "Usage: pcodex [-m model] [-a approval_mode] \"prompt text\""
+  local OPTIND opt
+  while getopts ":m:a:u" opt; do
+    case "$opt" in
+      m) model="$OPTARG" ;;
+      a) approval="$OPTARG" ;;
+      u)
+        echo "Updating ${pkg_name}..."
+        echo "\n--- CURRENT VERSION ---"
+        npm list -g --depth=0 "${pkg_name}"
+        echo "\n--- RUNNING UPDATE ---"
+        npm update -g "${pkg_name}"
+        echo "\n--- NEW VERSION ---"
+        npm list -g --depth=0 "${pkg_name}"
+        return 0
+        ;;
+      *)
+        echo "Usage: pcodex [-m model] [-a approval_mode] [-u] \"prompt text\""
         return 1
-    fi
-    local prompt="$*"
+        ;;
+    esac
+  done
+  shift $((OPTIND-1)) # remove processed options
 
-    # ---- run codex in a subshell so OPENAI_API_KEY isn’t left in env --------
-    (
-        export OPENAI_API_KEY=$(< ~/.openaikey)
-        codex -m "$model" --approval-mode "$approval" "$prompt"
-    )
+  if (( $# == 0 )); then
+    echo "Error: no prompt supplied."
+    echo "Usage: pcodex [-m model] [-a approval_mode] [-u] \"prompt text\""
+    return 1
+  fi
+  local prompt="$*"
+
+  (
+    export OPENAI_API_KEY=$(< ~/.openaikey)
+    local approval_flag
+    if [[ "$approval" == "yolo" ]]; then
+      approval_flag='--full-auto'
+    elif [[ "$approval" != "default" ]]; then
+      approval_flag="--ask-for-approval=$approval"
+    fi
+    codex -m "$model" $approval_flag "$prompt"
+  )
 }
+
+# ------------------------------------------------------------------------------
+# pgemini: prompts Google's Gemini CLI
+#
+# Usage: pgemini [-m model] [-a approval_mode] [-u] "prompt text"
+#
+# Options:
+#   -m model:           Specify the model to use.
+#                       Defaults to "gemini-1.5-pro-latest".
+#   -a approval_mode:   Set the approval mode ('default', 'auto_edit', 'yolo').
+#                       Defaults to 'default'.
+#   -u:                 Update the @google/gemini-cli package and exit.
+#
+function pgemini () {
+  local model='gemini-2.5-pro'
+  local approval='default'
+  local pkg_name='@google/gemini-cli'
+
+  local OPTIND opt
+  while getopts ":m:a:u" opt; do
+    case "$opt" in
+      m) model="$OPTARG" ;;
+      a) approval="$OPTARG" ;;
+      u)
+        echo "Updating ${pkg_name}..."
+        echo "\n--- CURRENT VERSION ---"
+        npm list -g --depth=0 "${pkg_name}"
+        echo "\n--- RUNNING UPDATE ---"
+        npm update -g "${pkg_name}"
+        echo "\n--- NEW VERSION ---"
+        npm list -g --depth=0 "${pkg_name}"
+        return 0
+        ;;
+      *)
+        echo "Usage: pgemini [-m model] [-a approval_mode] [-u] \"prompt text\""
+        return 1
+        ;;
+    esac
+  done
+  shift $((OPTIND-1))
+
+  if (( $# == 0 )); then
+    echo "Error: no prompt supplied."
+    echo "Usage: pgemini [-m model] [-a approval_mode] [-u] \"prompt text\""
+    return 1
+  fi
+  local prompt="$*"
+
+  (
+    export GOOGLE_CLOUD_PROJECT="$(< ~/.googlegeminiprojectid)"
+    export GOOGLE_CLOUD_LOCATION="us-central1"
+    local approval_flag
+    if [[ "$approval" == "yolo" ]]; then
+      approval_flag='--yolo'
+    elif [[ "$approval" != "default" ]]; then
+      approval_flag="--approval-mode=$approval"
+    fi
+    gemini --prompt-interactive "$prompt" -m "$model" $approval_flag
+  )
+}
+
+# ------------------------------------------------------------------------------
+# pclaude: prompts Anthropic's Claude Code CLI
+#
+# Usage: pclaude [-m model] [-a approval_mode] [-u] "prompt text"
+#
+# Options:
+#   -m model:           Specify the model to use.
+#                       Defaults to "claude-3-5-sonnet-20240620".
+#   -a approval_mode:   Set the approval mode ('default', 'yolo').
+#                       Defaults to 'default'.
+#   -u:                 Update the @anthropic-ai/claude-code package and exit.
+#
+function pclaude () {
+  local main_model='claude-opus-4-1@20250805'
+  local small_fast_model='claude-3-5-haiku@20241022'
+  local claude_region='us-east5'
+  local approval='default'
+  local pkg_name='@anthropic-ai/claude-code'
+
+  local OPTIND opt
+  while getopts ":m:a:u" opt; do
+    case "$opt" in
+      m) model="$OPTARG" ;;
+      a) approval="$OPTARG" ;;
+      u)
+        echo "Updating ${pkg_name}..."
+        echo "\n--- CURRENT VERSION ---"
+        npm list -g --depth=0 "${pkg_name}"
+        echo "\n--- RUNNING UPDATE ---"
+        npm update -g "${pkg_name}"
+        echo "\n--- NEW VERSION ---"
+        npm list -g --depth=0 "${pkg_name}"
+        return 0
+        ;;
+      *)
+        echo "Usage: pclaude [-m model] [-a approval_mode] [-u] \"prompt text\""
+        return 1
+        ;;
+    esac
+  done
+  shift $((OPTIND-1))
+
+  if (( $# == 0 )); then
+    echo "Error: no prompt supplied."
+    echo "Usage: pclaude [-m model] [-a approval_mode] [-u] \"prompt text\""
+    return 1
+  fi
+  local prompt="$*"
+
+  (
+    export CLAUDE_CODE_USE_VERTEX=1
+    export CLOUD_ML_REGION="$claude_region"
+    export ANTHROPIC_VERTEX_PROJECT_ID="$(< ~/.googlegeminiprojectid)"
+
+    export ANTHROPIC_MODEL="$main_model"
+    export ANTHROPIC_SMALL_FAST_MODEL="$small_fast_model"
+
+    local approval_flag
+    if [[ "$approval" == "yolo" ]]; then
+      approval_flag='--dangerously-skip-permissions'
+    fi
+    claude $approval_flag prompt "$prompt"
+  )
+}
+
