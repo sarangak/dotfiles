@@ -231,7 +231,7 @@ function pcodex () {
     elif [[ "$approval" != "default" ]]; then
       approval_flag="--ask-for-approval=$approval"
     fi
-    codex -m "$model" $approval_flag "$prompt"
+    codex --config preferred_auth_method="apikey" -m "$model" $approval_flag "$prompt"
   )
 }
 
