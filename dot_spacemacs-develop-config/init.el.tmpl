@@ -76,7 +76,8 @@ This function should only modify configuration layer settings."
           lsp-lens-enable t
           lsp-file-watch-threshold 10000
           lsp-log-io nil)
-     lua
+     (lua :variables
+          lua-backend 'lua-mode)
      (markdown :variables
                markdown-list-indent-width 2
                markdown-live-preview-engine 'vmd)
@@ -628,6 +629,8 @@ layers configuration. You are free to put any user code."
   (spacemacs/set-leader-keys "oc" 'private/open-local-platform-in-browser)
   (spacemacs/set-leader-keys "ov" 'private/evil-select-pasted)
   (spacemacs/set-leader-keys "o/" 'clone-indirect-buffer-other-window)
+  (spacemacs/set-leader-keys "ss" 'helm-swoop-without-pre-input)
+  (spacemacs/set-leader-keys "sS" 'helm-swoop)
   (global-unset-key (kbd "s-w"))
   ;; Use g m to goto mark, rather than backtick which I find hard to remember to use
   (define-key evil-motion-state-map "gm" 'evil-goto-mark)

@@ -264,6 +264,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -341,6 +342,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -390,6 +392,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -537,6 +540,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.mozilla\\.firefox$",
@@ -607,6 +611,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -656,6 +661,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$",
                                             "^org\\.mozilla\\.firefox$",
@@ -726,6 +732,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -780,6 +787,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -829,6 +837,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -878,6 +887,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -932,6 +942,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -986,6 +997,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -1040,6 +1052,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -1094,6 +1107,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -1256,6 +1270,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -1305,6 +1320,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],
@@ -1359,6 +1375,7 @@
                                             "^com\\.parallels\\.winapp\\.",
                                             "^com\\.apple\\.Terminal$",
                                             "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.mitchellh\\.ghostty$",
                                             "^co\\.zeit\\.hyperterm$",
                                             "^co\\.zeit\\.hyper$"
                                         ],

@@ -79,7 +79,7 @@ hs.hotkey.bind({"ctrl", "alt"}, ';', showAppExpose)
 hs.fnutils.each({
     { key = "b", app = 'com.google.Chrome' },
     { key = "h", app = 'com.tinyspeck.slackmacgap' },
-    { key = "m", app = 'com.googlecode.iterm2' },
+    { key = "m", app = 'com.mitchellh.ghostty' },
     { key = "v", app = 'com.microsoft.VSCode' },
     { key = "space", app = 'org.gnu.Emacs' },
   },
