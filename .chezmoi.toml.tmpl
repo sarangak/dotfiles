@@ -1,14 +1,16 @@
-{{- $category := promptString "category (personal, linux, work): " -}}
-{{- $arch := promptString "arch (arm64, amd64): " -}}
+{{- $category := promptStringOnce . "category" "category (personal, linux, work): " -}}
+{{- $arch := promptStringOnce . "arch" "arch (arm64, amd64): " -}}
+
+{{ if eq $category "work" }}
+encryption = "age"
+[age]
+    identity = "~/.ssh/id_ed25519"
+    symmetric = true
+{{- end }}
+
 [data]
   category = "{{ $category }}"
   arch = "{{ $arch }}"
   home = "{{ env "HOME" }}"
   user = "{{ env "USER" }}"
 
-{{ if eq .category "work" }}
-encryption = "age"
-[age]
-    identity = "~/.ssh/id_ed25519"
-    symmetric = true
-{{- end }}
